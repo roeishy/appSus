@@ -1,36 +1,61 @@
-import { userService } from '../../login/services/userService.js'
+import {keepService} from '../services/keep-service.js'
+import noteTxt from '../cmp/note-txt.cmp.js';
+import noteImg from '../cmp/note-img.cmp.js';
+import noteVideo from '../cmp/note-video.cmp.js';
+import noteTodos from '../cmp/note-todos.cmp.js';
+
 
 export default {
     template: `
-        <section v-if="user" class="mail-app">
+        <section >
            <h1>keeps </h1>
-           <p>welcome {{user.userName}} !</p>
-           
+           <div class="row" >
+        <div class="col-3">
+          <note-txt  :keeps="keeps" />
+          </div>
+          <div class="col-3">
+              <note-img  :keeps="keeps" />
+          </div>
+          <div class="col-3">
+          <note-video  :keeps="keeps" />
+          </div>
+          <div class="col-3">
+          <note-todos  :keeps="keeps" />
+          </div>
+            
+            </div>
+           <pre>{{keeps}}</pre>
         </section>
     `,
     components: {
-
+        noteTxt,
+        noteImg,
+        noteVideo,
+        noteTodos
     },
     data() {
         return {
             id: null,
-            user: null,
-            users: null,
+            user: null,            
+            keeps:null
         };
     },
     created() {
         this.id = this.$route.params.userId;
-        userService.getLogedUser(this.id)
-            .then(user => {
-                this.user = user
-            })
+        keepService.query(this.id).then(res=>{
+            this.keeps=res
+        })
+    
+    },
+    mounted(){
+        
     },
     methods: {
     },
     computed: {
-        allUsers() {
-            return userService.query()
-                .then(users => this.users = users);
+        allKeeps() {
+            return keepService.query()
+                .then(keeps => this.keeps = keeps);
         },
         // logedUser() {
         //     return userService.getLogedUser(this.id)

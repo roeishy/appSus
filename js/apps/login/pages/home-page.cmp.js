@@ -1,5 +1,6 @@
 import { userService } from '../services/userService.js'
 
+
 export default {
     template: `
         <section v-if="user" class="home-page">
@@ -17,6 +18,7 @@ export default {
             id: null,
             user: null,
             users: null,
+            
         };
     },
     created() {
@@ -32,7 +34,8 @@ export default {
         allUsers() {
             return userService.query()
                 .then(users => this.users = users);
-        },
+        }
+        
         // logedUser() {
         //     return userService.getLogedUser(this.id)
         //         .then(user => {
