@@ -20,7 +20,7 @@ export default {
          </div>
          <div class="col-9 border border-dark">
          <mail-list v-if="!showNewMail" :mails="mailsForDisplay" />
-         <mail-new v-if="showNewMail" :userId="user" />
+         <mail-new @sendMail="sendMail" v-if="showNewMail" :user="user" />
          </div>
      </div>
         </section>
@@ -63,6 +63,12 @@ export default {
         newMail() {
             console.log('new mail');
             this.showNewMail = !this.showNewMail
+        },
+        sendMail(mail) {
+
+            mailService.createMail(this.user.id, this.user.userName, mail.subject, mail.body, mail.to)
+            this.mails.push(mail)
+            this.newMail();
         }
     },
     computed: {
@@ -70,6 +76,16 @@ export default {
             return userService.query()
                 .then(users => this.users = users);
         },
+        // calcUser() {
+        //     userService.getLogedUser(this.id)
+        //         .then(user => {
+        //             this.user = user
+        //         })
+        // },
+        // calcMails() {
+        //     mailService.query()
+        //         .then(mails => this.mails = mails);
+        // },
         mailsForDisplay() {
             if (this.filtserBy === 'sent') {
                 return this.mails.filter(mail => {
