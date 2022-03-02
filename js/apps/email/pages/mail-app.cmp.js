@@ -1,23 +1,29 @@
 import { userService } from '../../login/services/userService.js'
-
+import { mailService } from '../services/mailService.js';
+import mailList from '../cmps/mail-list.cmp.js';
 export default {
     template: `
         <section v-if="user" class="mail-app">
            <h1>email </h1>
            <p>welcome {{user.userName}} !</p>
-           <p>{{user.pass}}</p>
-           <p>{{user.mails}}</p>
+           <mail-list :mails="mails" />
         </section>
     `,
     components: {
-
+        mailList,
     },
     data() {
         return {
             id: null,
             user: null,
             users: null,
+            mails: null,
+            // filtserBy: null
         };
+    },
+    mounted() {
+        mailService.query()
+            .then(mails => this.mails = mails);
     },
     created() {
         this.id = this.$route.params.userId;
@@ -33,11 +39,15 @@ export default {
             return userService.query()
                 .then(users => this.users = users);
         },
-        // logedUser() {
-        //     return userService.getLogedUser(this.id)
-        //         .then(user => {
-        //             return user
-        //         })
-        // },
+        mailsForDisplay() {
+            // if (!this.filterBy) return this.mails;
+            // const regex = new RegExp(this.filterBy.vendor, 'i');
+            console.log(this.user.userName);
+            console.log(this.mails);
+            return this.mails.filter(mail => {
+                console.log(this.user.userName);
+                return mail.to === this.user.userName
+            });
+        }
     }
 };

@@ -2,69 +2,77 @@ import { utilService } from '../../../services/util-service.js';
 import { storageService } from '../../../services/async-storage-service.js';
 
 
-const USERS_KEY = 'users';
-const LOGED_USER_KEY = 'loged user'
-_createusers()
+const MAILS_KEY = 'mails';
+// const LOGED_mail_KEY = 'loged mail'
+_createMails()
 
 
-export const userService = {
+export const mailService = {
     query,
     remove,
     save,
     get,
-    createUser,
-    logIn,
-    getLogedUser,
+    createMail,
+    // logIn,
+    // getLogedmail,
 };
 
-function createUser(userName, pass) {
-    var user = {
-        userName: userName,
-        pass: pass,
-        mails: [],
-        keeps: []
+function createMail(userId, userName, subject, body, to) {
+    var mail = {
+        from: {
+            userId: userId,
+            userName: userName
+        },
+        subject: subject,
+        body: body,
+        isRead: false,
+        sentAt: Date.now(),
+        to: to
+
     }
-    save(user);
-    return user;
+    save(mail);
+    return mail;
+}
+
+function _createMails() {
+    let mails = utilService.loadFromStorage(MAILS_KEY);
+    if (!mails || !mails.length) {
+        mails = [
+            createMail('K4syEJr2', 'user2', 'hello user1', 'hello user1', 'user1'),
+            createMail('K4syEJr1', 'user1', 'hello user2', 'hello user2', 'user2')
+        ]
+        storageService.postMany(MAILS_KEY, mails);
+    }
+    return mails;
 }
 
 function query() {
-    return storageService.query(USERS_KEY);
+    return storageService.query(MAILS_KEY);
 }
 
-function remove(userId) {
-    return storageService.remove(USERS_KEY, userId);
+function remove(mailId) {
+    return storageService.remove(MAILS_KEY, mailId);
 }
 
-function get(userId) {
-    return storageService.get(USERS_KEY, userId);
+function get(mailId) {
+    return storageService.get(MAILS_KEY, mailId);
 }
 
-function save(user) {
-    if (user.id) return storageService.put(USERS_KEY, user);
-    else return storageService.post(USERS_KEY, user);
+function save(mail) {
+    if (mail.id) return storageService.put(MAILS_KEY, mail);
+    else return storageService.post(MAILS_KEY, mail);
 }
 
-function _createusers() {
-    let users = utilService.loadFromStorage(USERS_KEY);
-    if (!users || !users.length) {
-        users = [
-            createUser('user1', '111'),
-            createUser('user2', '222')
-        ]
-        storageService.postMany(USERS_KEY, users);
-    }
-    return users;
-}
 
-function logIn(userId) {
-    return storageService.get(USERS_KEY, userId)
-        .then(user => storageService.replace(LOGED_USER_KEY, user))
-}
 
-function getLogedUser(userId) {
-    console.log(userId);
-    // return storageService.get(LOGED_USER_KEY, userId)
-    return storageService.query(LOGED_USER_KEY);
+// function logIn(mailId) {
+//     return storageService.get(MAILS_KEY, mailId)
+//         .then(mail => storageService.replace(LOGED_mail_KEY, mail))
+// }
 
-}
+// function getLogedmail(mailId) {
+//     console.log(mailId);
+//     // return storageService.get(LOGED_mail_KEY, mailId)
+//     return storageService.query(LOGED_mail_KEY);
+
+// }
