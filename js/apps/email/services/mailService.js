@@ -21,6 +21,8 @@ function createUser(userName, pass) {
     var user = {
         userName: userName,
         pass: pass,
+        mails: [],
+        keeps: []
     }
     save(user);
     return user;
