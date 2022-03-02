@@ -6,7 +6,7 @@ export default {
         <section v-if="user" class="mail-app">
            <h1>email </h1>
            <p>welcome {{user.userName}} !</p>
-           <mail-list :mails="mails" />
+           <mail-list :mails="mailsForDisplay" />
         </section>
     `,
     components: {
@@ -45,7 +45,7 @@ export default {
             console.log(this.user.userName);
             console.log(this.mails);
             return this.mails.filter(mail => {
-                console.log(this.user.userName);
+                console.log('filtered:', this.user.userName);
                 return mail.to === this.user.userName
             });
         }
