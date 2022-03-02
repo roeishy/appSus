@@ -25,10 +25,10 @@ export default {
     data() {
         return {
             newMail: {
-                from: {
-                    userId: '',
-                    userName: ''
-                },
+                // from: {
+                //     userId: '',
+                //     userName: ''
+                // },
                 to: '',
                 subject: '',
                 body: ''
@@ -39,11 +39,14 @@ export default {
 
     },
     created() {
-        this.newMail.from.userId = this.user.userId
+        // this.newMail.from.userId = this.user.id
+        // this.newMail.from.userName = this.user.userName
+
     },
     methods: {
         sendMail() {
             console.log('sending');
+            console.log(this.newMail);
             this.$emit('sendMail', this.newMail);
         }
     },
