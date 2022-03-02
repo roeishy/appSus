@@ -39,7 +39,10 @@ function _createMails() {
     if (!mails || !mails.length) {
         mails = [
             createMail('K4syEJr2', 'user2', 'hello user1', 'hello user1', 'user1'),
-            createMail('K4syEJr1', 'user1', 'hello user2', 'hello user2', 'user2')
+            createMail('K4syEJr2', 'user2', 'hi user1', 'hi user1', 'user1'),
+            createMail('K4syEJr1', 'user1', 'hello user2', 'hello user2', 'user2'),
+            createMail('K4syEJr1', 'user1', 'hi user2', 'hi user2', 'user2'),
+
         ]
         storageService.postMany(MAILS_KEY, mails);
     }

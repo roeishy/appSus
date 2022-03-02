@@ -4,17 +4,17 @@ export default {
     props: ['mail'],
     template: `
         <section class="mail-preview">
-            <div class="row">
-                <div>
+            <div class="row text-center">
+                <div class="col border border-dark">
                     {{mail.from.userName}}
                 </div>
-                <div>
+                <div class="col border border-dark">
                     {{mail.subject}}
                 </div>
-                <div>
+                <div class="col border border-dark">
                     <mail-body :body="mail.body" />
                 </div>
-                <div>
+                <div class="col border border-dark">
                     {{date}}
                 </div>
             </div>

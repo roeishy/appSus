@@ -1,16 +1,32 @@
 import { userService } from '../../login/services/userService.js'
 import { mailService } from '../services/mailService.js';
 import mailList from '../cmps/mail-list.cmp.js';
+import foldersList from '../cmps/folders-list.cmp.js';
+
+
+
 export default {
     template: `
-        <section v-if="user" class="mail-app">
-           <h1>email </h1>
-           <p>welcome {{user.userName}} !</p>
-           <mail-list :mails="mailsForDisplay" />
+    <section v-if="user" class="mail-app">
+     <div class="row">
+         <div class="col-12 border border-dark">
+         <h1>email </h1>
+         <p>welcome {{user.userName}} !</p>
+         </div>
+     </div>
+     <div class="row">
+         <div class="col-3 border border-dark">
+            <folders-list />
+         </div>
+         <div class="col-9 border border-dark">
+         <mail-list :mails="mailsForDisplay" />
+         </div>
+     </div>
         </section>
     `,
     components: {
         mailList,
+        foldersList,
     },
     data() {
         return {
