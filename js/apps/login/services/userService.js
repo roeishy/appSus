@@ -47,8 +47,8 @@ function _createusers() {
     let users = utilService.loadFromStorage(USERS_KEY);
     if (!users || !users.length) {
         users = [
-            createUser('user1', '111'),
-            createUser('user2', '222')
+            { userName: "user1", pass: "111", id: "K4syEJr1" },
+            { userName: "user2", pass: "222", id: "K4syEJr2" }
         ]
         storageService.postMany(USERS_KEY, users);
     }
@@ -61,7 +61,6 @@ function logIn(userId) {
 }
 
 function getLogedUser(userId) {
-    console.log(userId);
     // return storageService.get(LOGED_USER_KEY, userId)
     return storageService.query(LOGED_USER_KEY);
 
