@@ -17,7 +17,7 @@ const routes = [
         component: homePage
     },
     {
-        path: '/mail/:userId',
+        path: '/mail/:userId/:folder?',
         component: mailApp
     },
     {

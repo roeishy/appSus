@@ -1,22 +1,23 @@
 
 export default {
+    props: ['userId'],
     template: `
         <section class="mail-preview">
             <div class="col text-center">
-            <div class="row border border-dark">
+                <div @click="newMail" class="row border border-dark">
                     new mail
                 </div>
                 <div class="row border border-dark">
-                    inbox
+                    <router-link :to="'/mail/'+userId+'/inbox'">inbox</router-link>
                 </div>
                 <div class="row border border-dark">
-                    sent
+                    <router-link :to="'/mail/'+userId+'/sent'">sent</router-link>
                 </div>
                 <div class="row border border-dark">
-                    trash
+                    <router-link :to="'/mail/'+userId+'/trash'">trash</router-link>
                 </div>
                 <div class="row border border-dark">
-                    drafts
+                    <router-link :to="'/mail/'+userId+'/drafts'">drafts</router-link>
                 </div>
             </div>
         </section>
@@ -31,13 +32,7 @@ export default {
     methods: {
         newMail() {
             this.$emit('newMail')
-        },
-        inbox() {
-            this.$emit('newMail')
-        },
-        newMail() {
-            this.$emit('newMail')
-        },
+        }
     },
     computed: {
 
