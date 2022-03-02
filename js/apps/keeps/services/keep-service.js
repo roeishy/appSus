@@ -61,7 +61,7 @@ function _createKeeps(userId) {
             createKeep(userId, 'note-img', true, {url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/Cecil_the_lion_at_Hwange_National_Park_%284516560206%29.jpg/800px-Cecil_the_lion_at_Hwange_National_Park_%284516560206%29.jpg', title:'my dog'}, {backgroundColor: 'lightgoldenrodyellow'}),
             createKeep(userId, 'note-txt', false, {txt: 'my name is fares'}, {textAlign: 'center'}),
             createKeep(userId, 'note-todos', false, {label: 'to buy', todos:[{txt:'tomato', doneAt: null}, {txt:'chocolate', doneAt: 18711111}]}, {color: 'orange'}),
-            createKeep(userId, 'note-video', true, {url: 'https://www.youtube.com/watch?v=HnwRA_w6jXo', title:'my village'}, {color: 'blue'})
+            createKeep(userId, 'note-video', true, {url: 'https://www.youtube.com/embed/HnwRA_w6jXo', title:'my village'}, {color: 'blue'})
         ]
         storageService.postMany(KEY, keeps);
     }
