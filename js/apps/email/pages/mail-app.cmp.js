@@ -65,7 +65,10 @@ export default {
             this.showNewMail = !this.showNewMail
         },
         sendMail(mail) {
+
             mailService.createMail(this.user.id, this.user.userName, mail.subject, mail.body, mail.to)
+            this.mails.push(mail)
+            this.newMail();
         }
     },
     computed: {
