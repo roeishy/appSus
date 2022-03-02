@@ -10,16 +10,16 @@ export default {
         <section >
            <h1>keeps </h1>
            <div class="row" >
-        <div class="col-3">
+        <div class="col">
           <note-txt  :keeps="keeps" />
           </div>
-          <div class="col-3">
+          <div class="col">
               <note-img  :keeps="keeps" />
           </div>
-          <div class="col-3">
+          <div class="col">
           <note-video  :keeps="keeps" />
           </div>
-          <div class="col-3">
+          <div class="col">
           <note-todos  :keeps="keeps" />
           </div>
             

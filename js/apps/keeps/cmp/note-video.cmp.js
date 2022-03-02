@@ -9,8 +9,9 @@ export default {
               <h5 class="text-center">{{keep.info.title}}</h5>
               <div class="card-body">
               <iframe width="220" height="315"
-                src="keep.info.url">
+                :src="keep.info.url">
                 </iframe>
+                
               
                 <h5 class="card-title">TYPE: {{keep.type}}</h5>
                 <a href="#" v-if="keep.isPinned" class="btn btn-warning">📌</a>

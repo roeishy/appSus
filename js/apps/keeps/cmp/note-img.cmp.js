@@ -1,7 +1,7 @@
 export default {
     props:['keeps'],
     template: `
-    <section v-for="keep in keeps" :key=keep.id>
+    <section v-for="keep in keeps" :key=keep.id >
         <div v-if="keep.type==='note-img'">
          <div class="card shadow-lg p-3 mb-5 bg-body rounded" :style="keep.style">             
               <img v-if="keep.info.url" :src="keep.info.url" class="card-img-top" alt="...">
