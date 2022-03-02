@@ -1,6 +1,6 @@
 import { userService } from '../apps/login/services/userService.js'
 export default {
-  template: `
+    template: `
             <nav v-if="user" class="navbar navbar-expand-lg navbar-dark bg-dark">
               <div class="container-fluid">
                 <a class="navbar-brand" href="#">AppSus</a>
@@ -12,15 +12,15 @@ export default {
                     <li class="nav-item">
                     <router-link :to="'/home/'+user.id"><button class="btn btn-dark btn-outline-warning m-1 text-light">Home</button></router-link>
                     </li>
-                    <!-- <li class="nav-item">
+                    <li class="nav-item">
                     <router-link to="/about"><button class="btn btn-dark btn-outline-warning m-1 text-light">About</button></router-link>
                     </li>
                     <li class="nav-item">
-                    <router-link to="'/mail/'+user.id"><button class="btn btn-dark btn-outline-warning m-1 text-light">Mails</button></router-link>
+                    <router-link :to="'/mail/'+user.id"><button class="btn btn-dark btn-outline-warning m-1 text-light">Mails</button></router-link>
                     </li> 
                     <li class="nav-item">
-                    <router-link to="/keeps/+user.id"><button class="btn btn-dark btn-outline-warning m-1 text-light">Keeps</button></router-link>
-                    </li>                                         -->
+                    <router-link :to="'/keeps/'+user.id"><button class="btn btn-dark btn-outline-warning m-1 text-light">Keeps</button></router-link>
+                    </li>                                        
                   </ul>  
                   <div class="float-end">                  
                     <router-link to="/" ><button class="btn btn-dark btn-outline-warning m-1 text-light">LogIn</button></router-link>                    
@@ -32,20 +32,27 @@ export default {
         
     
     `,
-  data() {
-    return {
-      user: null,
+    data(){
+        return{
+            id: null,
+            user: null,
+            users: null,
+        }
+    },
+    created() {
+        this.id = this.$route.params.userId;
+        userService.getLogedUser(this.id)
+            .then(user => {
+                this.user = user
+            })
+    },
+    methods: {
+    },
+    computed: {
+        allUsers() {
+            return userService.query()
+                .then(users => this.users = users);
+        }        
+        
     }
-  },
-  created() {
-    const id = this.$route.params.userId;
-    userService.getLogedUser(id)
-      .then(user => {
-        this.user = user
-      })
-  },
-  methods: {
-  },
-  computed: {
-  }
 }
