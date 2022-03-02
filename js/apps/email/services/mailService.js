@@ -3,7 +3,6 @@ import { storageService } from '../../../services/async-storage-service.js';
 
 
 const MAILS_KEY = 'mails';
-// const LOGED_mail_KEY = 'loged mail'
 _createMails()
 
 
@@ -13,8 +12,6 @@ export const mailService = {
     save,
     get,
     createMail,
-    // logIn,
-    // getLogedmail,
 };
 
 function createMail(userId, userName, subject, body, to) {
@@ -65,17 +62,3 @@ function save(mail) {
     if (mail.id) return storageService.put(MAILS_KEY, mail);
     else return storageService.post(MAILS_KEY, mail);
 }
-
-
-
-// function logIn(mailId) {
-//     return storageService.get(MAILS_KEY, mailId)
-//         .then(mail => storageService.replace(LOGED_mail_KEY, mail))
-// }
-
-// function getLogedmail(mailId) {
-//     console.log(mailId);
-//     // return storageService.get(LOGED_mail_KEY, mailId)
-//     return storageService.query(LOGED_mail_KEY);
-
-// }

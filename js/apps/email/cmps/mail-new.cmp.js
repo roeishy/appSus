@@ -1,45 +1,51 @@
-import mailPreview from "./mail-preview.cmp.js";
-
-
 export default {
-    props: ['mails'],
+    props: ['user'],
     template: `
-        <section class="mail-list">
-           <h1>emails </h1>
-           <div class="row text-center ">
-                <div class="col border border-dark">
-                    from
-                </div>
-                <div class="col border border-dark">
-                    subject
-                </div>
-                <div class="col border border-dark">
-                    body
-                </div>
-                <div class="col border border-dark">
-                    date
-                </div>
-            </div>
-           <div v-for="mail in mails" :key="mail.id">
-                <mail-preview :mail="mail" />
-           </div>
+        <section class="mail-new">
+        <form @submit.prevent="sendMail">
+                <label for="to">
+                    to:
+                    <input v-model="newMail.to" type="text" id="to" required>
+                </label>
+                <label for="pass">
+                    subject:
+                    <input v-model="newMail.subject" type="text" id="subject" required>
+                </label>
+                <label for="body">
+                    body:
+                    <textarea v-model="newMail.body" type="text" id="body" required></textarea>
+                </label>
+                <button >Send</button>
+            </form>
         </section>
     `,
     components: {
-        mailPreview
+
     },
     data() {
         return {
-
+            newMail: {
+                from: {
+                    userId: '',
+                    userName: ''
+                },
+                to: '',
+                subject: '',
+                body: ''
+            }
         };
     },
     mounted() {
 
     },
     created() {
-
+        this.newMail.from.userId = this.user.userId
     },
     methods: {
+        sendMail() {
+            console.log('sending');
+            this.$emit('sendMail', this.newMail);
+        }
     },
     computed: {
 

@@ -2,7 +2,7 @@ import { userService } from '../../login/services/userService.js'
 import { mailService } from '../services/mailService.js';
 import mailList from '../cmps/mail-list.cmp.js';
 import foldersList from '../cmps/folders-list.cmp.js';
-
+import mailNew from '../cmps/mail-new.cmp.js';
 
 
 export default {
@@ -20,6 +20,7 @@ export default {
          </div>
          <div class="col-9 border border-dark">
          <mail-list v-if="!showNewMail" :mails="mailsForDisplay" />
+         <mail-new v-if="showNewMail" :userId="user" />
          </div>
      </div>
         </section>
@@ -27,6 +28,7 @@ export default {
     components: {
         mailList,
         foldersList,
+        mailNew,
     },
     data() {
         return {
@@ -60,6 +62,7 @@ export default {
         },
         newMail() {
             console.log('new mail');
+            this.showNewMail = !this.showNewMail
         }
     },
     computed: {
