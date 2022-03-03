@@ -4,25 +4,23 @@ export default {
     props: ['mail'],
     template: `
         <section class="mail-preview">
-            <div class="mail row text-center border border-dark ">
-            <div class="col-9">
-                <div @click="read" class="row ">
+            
+                <div class="from" @click="read" >
                     {{mail.from.userName}}
                 </div>
-                <div @click="read" class="row ">
+                <div class="subject" @click="read" >
                     {{mail.subject}}
                 </div>
-                <div @click="read" class="row ">
-                    <mail-body :body="mail.body" />
+                <div class="body" @click="read" >
+                {{mail.subject}}-<mail-body :body="mail.body" />
                 </div>
-            </div>
-                <div @click="read" class="col-2 ">
+            
+                <div class="date" @click="read" >
                     {{date}}
                 </div>
-                <div id="mail-btns" class=" col-1">
-                    <button class="btn btn-danger" @click="trash">🗑</button>
+                <div class="mail-btns" id="mail-btns" >
+                    <button class="" @click="trash">🗑</button>
                 </div>
-            </div>
         </section>
     `,
     components: {

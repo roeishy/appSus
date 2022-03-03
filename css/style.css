@@ -3,12 +3,11 @@
 }
 
 h1, h2, h3, h4, h5, h6, p {
-    margin: 0;
-    padding: 0px;
+    margin: 0px;
 }
 
 body{
-    margin: 0;
+    margin: 0px;
 
 }
 
@@ -32,17 +31,130 @@ body{
     background-color: lightcyan;
 }
 
-/* mail list */ 
-.mail{
-    background-color: rgba(224, 226, 226, 0.65);
+/* helpers */ 
+.grid-container{
+    display: grid;
 }
-.mail:hover{
+
+.flex-col{
+    display: flex;
+    flex-direction: column;
+}
+
+.flex {
+    display: flex; 
+}
+  
+.flex-1 {
+    flex: 1; 
+}
+  
+.justify-center {
+    justify-content: center; 
+}
+  
+.align-center {
+    align-items: center; 
+}
+  
+.hide{
+    display: none;
+}
+
+
+
+
+/* mail app */ 
+.mail-app{
+    display: grid;
+    height: 90vh;
+    grid-template-columns: 1fr 9fr ;
+  grid-template-rows: 1fr 9fr;
+  grid-template-areas:
+  "logo ."
+  "folders main"
+  ;
+  gap: 10px;
+  background-color: #dddddd;
+  padding: 10px;
+}
+
+.logo{
+    grid-area: logo;
+}
+.main{
+    grid-area: main;
+}
+.folders{
+    grid-area: folders;
+}
+
+/* mail folders */
+
+.mail-folders{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.folder{
+    width: 10rem;
+  background-color: #fff;
+  border: 0 solid #e2e8f0;
+  border-radius: 1.5rem;
+  box-sizing: border-box;
+  color: #0d172a;
+  cursor: pointer;
+  display: inline-block;
+  font-family: "Basier circle",-apple-system,system-ui,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+  font-size: 1.1rem;
+  font-weight: 600;
+  line-height: 1;
+  padding: 1rem 1.6rem;
+  text-align: center;
+  text-decoration: none #0d172a solid;
+  text-decoration-thickness: auto;
+  transition: all .1s cubic-bezier(.4, 0, .2, 1);
+  box-shadow: 0px 1px 2px rgba(166, 175, 195, 0.25);
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.folder:hover {
+  background-color: #1e293b;
+  color: #fff;
+}
+
+@media (min-width: 768px) {
+    .folder {
+    font-size: 1.125rem;
+    padding: 1rem 2rem;
+  }
+}
+
+/* mail preview */ 
+.mail-preview{
+    display: grid;
+    height: 90px;
+    grid-template-columns: 1fr 1fr 2fr 1fr ;
+  grid-template-rows: 1fr;
+  /* grid-template-areas:
+  "logo ."
+  "folders main"
+  ; */
+  gap: 10px;
+  background-color: #dddddd;
+  padding: 10px;
+  border-top: 1px solid rgb(187, 184, 184);
+}
+.mail-preview:hover{
     background-color: rgb(187, 189, 188);
 }
 #mail-btns{
     display: none;
 }
-.mail:hover #mail-btns{
+.mail-preview:hover #mail-btns{
     display: block;
     align-items: center;
 }

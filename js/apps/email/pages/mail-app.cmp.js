@@ -8,23 +8,23 @@ import mailRead from '../cmps/mail-read.cmp.js';
 
 export default {
     template: `
-    <section v-if="user" class="mail-app app-main">
-     <div class="row">
-         <div class="col-12 border border-dark">
+    <section v-if="user" class="mail-app">
+     <div class="logo">
+         <div class="">
          <h1>email </h1>
          <p>welcome {{user.userName}} !</p>
          </div>
      </div>
-     <div class="row">
-         <div class="col-3 border border-dark">
+     
+         <div class="folders">
             <folders-list @read="read" @newMail="newMail" :userId="id" />
          </div>
-         <div class="col-9 border border-dark">
-         <mail-list @read="read" @trash="trash" v-if="showList" :mails="mailsForDisplay" />
-         <mail-new @sendMail="sendMail" v-if="showNewMail" :user="user" />
-         <mail-read @trash="trash" @close="closeMail" v-if="showMail" :mail="selectedMail" />
+         <div class="main">
+            <mail-list @read="read" @trash="trash" v-if="showList" :mails="mailsForDisplay" />
+            <mail-new @sendMail="sendMail" v-if="showNewMail" :user="user" />
+            <mail-read @trash="trash" @close="closeMail" v-if="showMail" :mail="selectedMail" />
          </div>
-     </div>
+     
         </section>
     `,
     components: {
