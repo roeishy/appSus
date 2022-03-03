@@ -8,7 +8,8 @@ h1, h2, h3, h4, h5, h6, p {
 
 body{
     margin: 0px;
-
+    /* bottom: 0px;
+    height: 100vh; */
 }
 
 /* app-header , app-footer */
@@ -27,7 +28,7 @@ body{
 
 
 .app-main {
-    height: 90vh;
+    height: 95vh;
     background-color: lightcyan;
 }
 
@@ -67,7 +68,7 @@ body{
 /* mail app */ 
 .mail-app{
     display: grid;
-    height: 90vh;
+    height: 95vh;
     grid-template-columns: 1fr 9fr ;
   grid-template-rows: 1fr 9fr;
   grid-template-areas:
@@ -75,8 +76,7 @@ body{
   "folders main"
   ;
   gap: 10px;
-  background-color: #dddddd;
-  padding: 10px;
+  background-color: #ffffff;
 }
 
 .logo{
@@ -101,7 +101,8 @@ body{
     width: 10rem;
   background-color: #fff;
   border: 0 solid #e2e8f0;
-  border-radius: 1.5rem;
+  border-top-right-radius:1.5rem;
+  border-bottom-right-radius:1.5rem;
   box-sizing: border-box;
   color: #0d172a;
   cursor: pointer;
@@ -137,14 +138,10 @@ body{
 .mail-preview{
     display: grid;
     height: 90px;
-    grid-template-columns: 1fr 1fr 2fr 1fr ;
+    grid-template-columns: 2fr 4fr 2fr 1fr;
   grid-template-rows: 1fr;
-  /* grid-template-areas:
-  "logo ."
-  "folders main"
-  ; */
   gap: 10px;
-  background-color: #dddddd;
+  background-color: #ffffff;
   padding: 10px;
   border-top: 1px solid rgb(187, 184, 184);
 }
@@ -154,11 +151,93 @@ body{
 #mail-btns{
     display: none;
 }
+.mail-btns{
+    display: inline-flex;
+    /* position:relative; */
+}
 .mail-preview:hover #mail-btns{
     display: block;
     align-items: center;
 }
 
+.sub-body{
+    display: flex;
+    gap: 10px;
+}
+.subject{
+    font-weight: bold;
+}
+
+
+/* new-mail */
+.mail-new{
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 50vh;
+    height: 50vh;
+    overflow: hidden;
+    z-index: 3;
+    background-color: white;
+    border-radius: 8px 8px 0 0;
+    box-shadow: 0px 8px 10px 1px rgba(0,0,0,0.14),0px 3px 14px 2px rgba(0,0,0,0.12),0px 5px 5px -3px rgba(0,0,0,0.2);
+    
+}
+
+.new-mail-head{
+    margin-left: 16px;
+    font-weight: 500;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    height: auto;
+    line-height: 20px;
+    padding-left: 0;
+    padding-right: 0;
+    background-position: left center;
+    background-repeat: no-repeat;
+    color: white;
+    margin-left: 0px;
+    background: #202124;;
+}
+
+.new-mail-head h1{
+    -webkit-font-smoothing: antialiased;
+    font-family: Roboto,RobotoDraft,Helvetica,Arial,sans-serif;
+    font-size: .875rem;
+    letter-spacing: .2px;
+    font-weight: 500;
+    margin: 15px;
+}
+
+.mail-new form{
+    display: flex;
+    flex-direction: column;
+}
+
+.new-mail-to{
+  padding:10px;
+  border:0;
+  box-shadow:0 0 15px 4px rgba(0,0,0,0.06);
+  border-radius:10px;
+  width: 100vh;
+}
+
+.new-mail-subject{
+    padding:10px;
+    border:0;
+    box-shadow:0 0 15px 4px rgba(0,0,0,0.06);
+    border-radius:10px;
+    width: 100vh;
+}
+
+.new-mail-body{
+    padding:10px;
+    border:0;
+    box-shadow:0 0 15px 4px rgba(0,0,0,0.06);
+    border-radius:10px;
+    width: 100vh;
+    height: 30vh;
+}
 
 
 /* user-msg */

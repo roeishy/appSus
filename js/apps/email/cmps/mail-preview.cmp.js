@@ -8,13 +8,14 @@ export default {
                 <div class="from" @click="read" >
                     {{mail.from.userName}}
                 </div>
-                <div class="subject" @click="read" >
-                    {{mail.subject}}
+                <div class="sub-body"  @click="read">
+                    <div class="subject" @click="read" >
+                        {{mail.subject}} - 
+                    </div>
+                    <div class="body" @click="read" >
+                        <mail-body :body="mail.body" />
+                    </div>
                 </div>
-                <div class="body" @click="read" >
-                {{mail.subject}}-<mail-body :body="mail.body" />
-                </div>
-            
                 <div class="date" @click="read" >
                     {{date}}
                 </div>

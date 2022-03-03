@@ -67,8 +67,8 @@ export default {
         },
         newMail() {
             console.log('new mail');
-            this.showList = this.showNewMail ? true : false
-            this.showMail = false;
+            // this.showList = this.showNewMail ? true : false
+            // this.showMail = false;
             this.showNewMail = !this.showNewMail
         },
         sendMail(mail) {
