@@ -4,6 +4,7 @@
 
 h1, h2, h3, h4, h5, h6, p {
     margin: 0;
+    padding: 0px;
 }
 
 body{
@@ -31,66 +32,22 @@ body{
     background-color: lightcyan;
 }
 
-
-
-/* book-app */
-
-.book-app{
-    height: 90vh;
-    background-color: lightcyan;
+/* mail list */ 
+.mail{
+    background-color: rgba(224, 226, 226, 0.65);
+}
+.mail:hover{
+    background-color: rgb(187, 189, 188);
+}
+#mail-btns{
+    display: none;
+}
+.mail:hover #mail-btns{
+    display: block;
+    align-items: center;
 }
 
-/* book-filter */
 
-.book-filter{
-    background-color: lightslategray;
-    padding: 10px;
-}
-
-/* book-edit */
-
-.book-edit{
-    background-color: lightpink;
-    padding: 20px;
-    margin-bottom: 10px;
-}
-
-/* book-details */
-
-.book-details{
-    background-color: lightcoral;
-    padding: 20px;
-
-}
-
-.book-details img{
-    width: 150px;
-
-}
-
-/* book-list */
-
-.book-list ul{
-    list-style: none;
-    margin: 0;
-    padding: 10px;
-    display: flex;
-    flex-wrap: wrap;
-}
-
-/* book-preview */
-
-.book-preview-container{
-    padding: 10px;
-    margin: 10px;
-    width: 150px;
-    height: 150px;
-    background-color: lightgreen;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    border-radius: 10px;
-}
 
 /* user-msg */
 

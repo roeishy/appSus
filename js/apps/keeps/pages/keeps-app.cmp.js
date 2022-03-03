@@ -1,4 +1,4 @@
-import {keepService} from '../services/keep-service.js'
+import { keepService } from '../services/keep-service.js'
 import keepsList from '../cmp/keeps-list.cmp.js';
 
 
@@ -16,7 +16,7 @@ export default {
             </div>
             <div class="row">
             <div class="col-lg-3" v-for="keep in keeps" :key="keep.id">
-                <keeps-list  :keep="keep" @remove="removeKeep"/>
+                <keeps-list  :keep="keep" @removeTodo="removeTodo" @remove="removeKeep"/>
             </div>
             </div>
            <!-- <div class="row" >
@@ -39,33 +39,40 @@ export default {
     `,
     components: {
         keepsList
-        
+
     },
     data() {
         return {
             id: null,
-            user: null,            
-            keeps:null
+            user: null,
+            keeps: null
         };
     },
     created() {
         this.id = this.$route.params.userId;
-        keepService.query(this.id).then(res=>{
-            this.keeps=res
+        keepService.query(this.id).then(res => {
+            this.keeps = res
         })
-    
+
     },
-    mounted(){
-        
+    mounted() {
+
     },
     methods: {
-        removeKeep(id){//TODO
+        removeKeep(id) {//TODO
             console.log('id to remove: ', id);
-            
-            const idx = this.keeps.findIndex(keep=>keep.id===id)
+
+            const idx = this.keeps.findIndex(keep => keep.id === id)
             console.log('this keep deleted: ', idx);
             this.keeps.splice(idx, 1)
             console.log('keeps arr after delete: ', this.keeps);
+        },
+        removeTodo(todoId, keepId) {
+            var keepIdx = this.keeps.findIndex(keep => keep.id === keepId)
+            var keep = this.keeps[keepIdx]
+            const todoIdx = keep.info.txt.findIndex(todo => todo.id === todoId)
+            keep.info.txt.splice(todoIdx, 1)
+            //TODO update local storage
         }
     },
     computed: {

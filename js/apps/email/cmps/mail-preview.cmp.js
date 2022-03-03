@@ -4,21 +4,23 @@ export default {
     props: ['mail'],
     template: `
         <section class="mail-preview">
-            <div class="row text-center">
-                <div @click="read" class="col border border-dark">
+            <div class="mail row text-center border border-dark ">
+            <div class="col-9">
+                <div @click="read" class="row ">
                     {{mail.from.userName}}
                 </div>
-                <div @click="read" class="col border border-dark">
+                <div @click="read" class="row ">
                     {{mail.subject}}
                 </div>
-                <div @click="read" class="col border border-dark">
+                <div @click="read" class="row ">
                     <mail-body :body="mail.body" />
                 </div>
-                <div @click="read" class="col border border-dark">
+            </div>
+                <div @click="read" class="col-2 ">
                     {{date}}
                 </div>
-                <div class="col border border-dark">
-                    <button @click="trash">delete</button>
+                <div id="mail-btns" class=" col-1">
+                    <button class="btn btn-danger" @click="trash">🗑</button>
                 </div>
             </div>
         </section>

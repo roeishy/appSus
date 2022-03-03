@@ -4,19 +4,21 @@ export default {
     template: `
         <section class="mail-preview">
             <div class="col text-center">
-                <div @click="newMail" class="row border border-dark">
+                <div @click="newMail" class="row ">
                     new mail
                 </div>
-                <div class="row border border-dark">
+                <div class="row ">
                     <router-link :to="'/mail/'+userId+'/inbox'">inbox</router-link>
                 </div>
-                <div class="row border border-dark">
-                    <router-link :to="'/mail/'+userId+'/sent'">sent</router-link>
+                <div class="row ">
+                    <router-link :to="'/mail/'+userId+'/sent'">
+                        <button class="">sent</button>
+                    </router-link>
                 </div>
-                <div class="row border border-dark">
+                <div class="row ">
                     <router-link :to="'/mail/'+userId+'/trash'">trash</router-link>
                 </div>
-                <div class="row border border-dark">
+                <div class="row ">
                     <router-link :to="'/mail/'+userId+'/drafts'">drafts</router-link>
                 </div>
             </div>

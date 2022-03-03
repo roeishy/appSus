@@ -1,6 +1,5 @@
 import { userService } from '../../login/services/userService.js'
 import { mailService } from '../services/mailService.js';
-import { utilService } from '../../../services/util-service.js';
 import mailList from '../cmps/mail-list.cmp.js';
 import foldersList from '../cmps/folders-list.cmp.js';
 import mailNew from '../cmps/mail-new.cmp.js';
@@ -9,7 +8,7 @@ import mailRead from '../cmps/mail-read.cmp.js';
 
 export default {
     template: `
-    <section v-if="user" class="mail-app">
+    <section v-if="user" class="mail-app app-main">
      <div class="row">
          <div class="col-12 border border-dark">
          <h1>email </h1>

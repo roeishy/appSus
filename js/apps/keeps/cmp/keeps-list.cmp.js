@@ -1,7 +1,7 @@
 import todosPreview from './todos-preview.cmp.js';
 export default {
-    props:['keep'],
-    template: `
+  props: ['keep'],
+  template: `
     <section>        
          <div class="card shadow-lg p-3 mb-5 bg-body rounded" :style="keep.style"> 
               <h1>{{keep.info.title}}</h1>
@@ -21,40 +21,39 @@ export default {
       </section>
      
     `,
-    components:{
-      todosPreview
+  components: {
+    todosPreview
 
+  },
+  data() {
+    return {
+      isPinned: false
+    };
+  },
+  methods: {
+    remove(id) {
+      this.$emit('remove', id)
     },
-    data() {
-        return { 
-          isPinned: false
-        };
+    removeTodo(id) { //TODO
+      console.log(id);
+      this.$emit('removeTodo', id, this.keep.id)
     },
-    methods: {
-      remove(id){
-        this.$emit('remove', id)          
-      },
-      // removeTodo(id){ //TODO
-      //   console.log(id);
-      //     const idx = this.keep.txt.findIndex(todo=>todo.id===id)
-      //     console.log(idx);
-      // },
-      makePinned(pin){
-        pin != pin
-        pin? this.isPinned = true : this.isPinned = false
-      }
-    },
-    computed: {       
-        
-    },
-    created() {
-        
-    },
-    ummounted(){
-        
-    },
-    mounted(){
-        
+    makePinned(pin) {
+      pin != pin
+      pin ? this.isPinned = true : this.isPinned = false
     }
+  },
+  computed: {
+
+  },
+  created() {
+
+  },
+  ummounted() {
+
+  },
+  mounted() {
+
+  }
 
 };
