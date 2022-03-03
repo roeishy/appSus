@@ -1,5 +1,6 @@
 import { userService } from '../../login/services/userService.js'
 import { mailService } from '../services/mailService.js';
+import { utilService } from '../../../services/util-service.js';
 import mailList from '../cmps/mail-list.cmp.js';
 import foldersList from '../cmps/folders-list.cmp.js';
 import mailNew from '../cmps/mail-new.cmp.js';
@@ -19,7 +20,7 @@ export default {
             <folders-list @newMail="newMail" :userId="id" />
          </div>
          <div class="col-9 border border-dark">
-         <mail-list v-if="!showNewMail" :mails="mailsForDisplay" />
+         <mail-list @trash="trash" v-if="!showNewMail" :mails="mailsForDisplay" />
          <mail-new @sendMail="sendMail" v-if="showNewMail" :user="user" />
          </div>
      </div>
@@ -65,10 +66,25 @@ export default {
             this.showNewMail = !this.showNewMail
         },
         sendMail(mail) {
-
+            // mail.id = utilService.makeId()
             mailService.createMail(this.user.id, this.user.userName, mail.subject, mail.body, mail.to)
+            mail.sentAt = Date.now()
             this.mails.push(mail)
             this.newMail();
+        },
+        trash(trashMail) {
+            const idx = this.mails.findIndex(mail => mail.id === trashMail.id)
+            if (trashMail.isTrash) {
+                console.log('remove p');
+                mailService.remove(trashMail.id)
+                this.mails.splice(idx, 1)
+                return
+            }
+            console.log('trash');
+            trashMail.isTrash = true;
+            mailService.updateMail(trashMail)
+
+            this.mails.splice(idx, 1, trashMail)
         }
     },
     computed: {
@@ -76,29 +92,26 @@ export default {
             return userService.query()
                 .then(users => this.users = users);
         },
-        // calcUser() {
-        //     userService.getLogedUser(this.id)
-        //         .then(user => {
-        //             this.user = user
-        //         })
-        // },
-        // calcMails() {
-        //     mailService.query()
-        //         .then(mails => this.mails = mails);
-        // },
         mailsForDisplay() {
             if (this.filtserBy === 'sent') {
                 return this.mails.filter(mail => {
                     console.log('filtered:sent');
                     this.$route.params.folder = 'sent'
-                    return mail.from.userId === this.user.id
+                    return (mail.from.userId === this.user.id && !mail.isTrash)
                 })
             }
             if (this.filtserBy === 'inbox') {
                 return this.mails.filter(mail => {
                     console.log('filtered:inbox');
                     this.$route.params.folder = 'inbox'
-                    return mail.to === this.user.userName
+                    return (mail.to === this.user.userName && !mail.isTrash)
+                })
+            }
+            if (this.filtserBy === 'trash') {
+                return this.mails.filter(mail => {
+                    console.log('filtered:trash');
+                    this.$route.params.folder = 'trash'
+                    return ((mail.from.userId === this.user.id || mail.to === this.user.userName) && mail.isTrash)
                 })
             }
         }

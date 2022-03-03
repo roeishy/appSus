@@ -17,6 +17,9 @@ export default {
                 <div class="col border border-dark">
                     {{date}}
                 </div>
+                <div class="col border border-dark">
+                    <button @click="trash">delete</button>
+                </div>
             </div>
         </section>
     `,
@@ -28,6 +31,9 @@ export default {
     },
     created() { },
     methods: {
+        trash() {
+            this.$emit('trash', this.mail)
+        }
     },
     computed: {
         date() {
