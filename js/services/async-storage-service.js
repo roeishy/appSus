@@ -20,6 +20,7 @@ function get(entityType, entityId) {
 }
 
 function post(entityType, newEntity) {
+    console.log('i am herer in the post');
     newEntity.id = _makeId()
     return query(entityType)
         .then(entities => {
@@ -39,6 +40,7 @@ function postMany(entityType, newEntities) {
 }
 
 function put(entityType, updatedEntity) {
+    console.log('i am herer in the put');
     return query(entityType)
         .then(entities => {
             const idx = entities.findIndex(entity => entity.id === updatedEntity.id);

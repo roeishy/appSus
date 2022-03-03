@@ -18,6 +18,7 @@ export const keepService = {
 };
 
 function createKeep(userId, type, isPinned, info,createAt, updateAt, style) {
+    console.log('i am in the create keep');
     var keep = {
         id: utilService.makeId(),
         userId,
@@ -55,6 +56,7 @@ function save(keep) {
     if (keep.id) return storageService.put(KEY, keep);
     else return storageService.post(KEY, keep);
 }
+
 
 function _createKeeps(userId) {
     let keeps = utilService.loadFromStorage(KEY);
