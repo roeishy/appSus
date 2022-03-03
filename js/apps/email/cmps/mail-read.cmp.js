@@ -3,22 +3,23 @@ import mailBody from "./mail-body.cmp.js"
 export default {
     props: ['mail'],
     template: `
-        <section class="mail-preview">
-            <div class="row text-center">
-                <div @click="read" class="col border border-dark">
+        <section class="mail-read">
+            <div class="">
+                <div class="">
                     {{mail.from.userName}}
                 </div>
-                <div @click="read" class="col border border-dark">
+                <div class="">
                     {{mail.subject}}
                 </div>
-                <div @click="read" class="col border border-dark">
-                    <mail-body :body="mail.body" />
+                <div class="">
+                    {{mail.body}}
                 </div>
-                <div @click="read" class="col border border-dark">
+                <div class="">
                     {{date}}
                 </div>
-                <div class="col border border-dark">
+                <div class="">
                     <button @click="trash">delete</button>
+                    <button @click="close">x</button>
                 </div>
             </div>
         </section>
@@ -33,9 +34,10 @@ export default {
     methods: {
         trash() {
             this.$emit('trash', this.mail)
+            this.close()
         },
-        read() {
-            this.$emit('read', this.mail)
+        close() {
+            this.$emit('close')
         }
     },
     computed: {

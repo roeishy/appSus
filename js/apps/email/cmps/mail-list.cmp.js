@@ -24,7 +24,7 @@ export default {
                 </div>
             </div>
            <div v-for="mail in mails" :key="mail.id">
-                <mail-preview @trash="trash" :mail="mail" />
+                <mail-preview @read="read" @trash="trash" :mail="mail" />
            </div>
         </section>
     `,
@@ -45,6 +45,9 @@ export default {
     methods: {
         trash(mail) {
             this.$emit('trash', mail)
+        },
+        read(mail) {
+            this.$emit('read', mail)
         }
     },
     computed: {
