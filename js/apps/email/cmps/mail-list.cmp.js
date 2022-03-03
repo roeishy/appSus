@@ -19,9 +19,12 @@ export default {
                 <div class="col border border-dark">
                     date
                 </div>
+                <div class="col border border-dark">
+                    actions
+                </div>
             </div>
            <div v-for="mail in mails" :key="mail.id">
-                <mail-preview :mail="mail" />
+                <mail-preview @trash="trash" :mail="mail" />
            </div>
         </section>
     `,
@@ -40,6 +43,9 @@ export default {
 
     },
     methods: {
+        trash(mail) {
+            this.$emit('trash', mail)
+        }
     },
     computed: {
 

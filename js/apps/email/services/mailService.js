@@ -12,9 +12,10 @@ export const mailService = {
     save,
     get,
     createMail,
+    updateMail,
 };
 
-function createMail(userId, userName, subject, body, to) {
+function createMail(userId, userName, subject, body, to, id = null) {
     var mail = {
         from: {
             userId: userId,
@@ -24,11 +25,17 @@ function createMail(userId, userName, subject, body, to) {
         body: body,
         isRead: false,
         sentAt: Date.now(),
-        to: to
-
+        to: to,
+        isTrash: false,
+        isDraft: false,
+        id: id
     }
     save(mail);
     return mail;
+}
+
+function updateMail(mail) {
+    return storageService.put(MAILS_KEY, mail)
 }
 
 function _createMails() {
