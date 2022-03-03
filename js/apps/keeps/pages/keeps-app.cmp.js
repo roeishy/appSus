@@ -16,7 +16,7 @@ export default {
             </div>
             <div class="row">
             <div class="col-lg-3" v-for="keep in keeps" :key="keep.id">
-                <keeps-list  :keep="keep" @remove="removeKeep"/>
+                <keeps-list  :keep="keep" @remove="removeKeep" @removeTodo="removeTodo"/>
             </div>
             </div>
            <!-- <div class="row" >
@@ -66,6 +66,12 @@ export default {
             console.log('this keep deleted: ', idx);
             this.keeps.splice(idx, 1)
             console.log('keeps arr after delete: ', this.keeps);
+        },
+        removeTodo(keepId, todoId){
+            const keepIdx= this.keeps.findIndex(keep=>keep.id===keepId)
+            console.log('keepIdX', keepIdx);
+            const todoIdx= this.keeps.txt[keepIdx].findIndex(todo=>todo.id===todoId)
+            console.log('todoIdx', todoIdx);
         }
     },
     computed: {

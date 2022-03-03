@@ -34,11 +34,9 @@ export default {
       remove(id){
         this.$emit('remove', id)          
       },
-      // removeTodo(id){ //TODO
-      //   console.log(id);
-      //     const idx = this.keep.txt.findIndex(todo=>todo.id===id)
-      //     console.log(idx);
-      // },
+      removeTodo(id){ //TODO
+        this.$emit('removeTodo', this.keep.id, id)
+      },
       makePinned(pin){
         pin != pin
         pin? this.isPinned = true : this.isPinned = false
