@@ -16,7 +16,7 @@ export default {
                     <router-link to="/about"><button class="btn btn-dark btn-outline-warning m-1 text-light">About</button></router-link>
                     </li>
                     <li class="nav-item">
-                    <router-link :to="'/mail/'+user.id"><button class="btn btn-dark btn-outline-warning m-1 text-light">Mails</button></router-link>
+                    <router-link :to="'/mail/'+user.id+'/inbox'"><button class="btn btn-dark btn-outline-warning m-1 text-light">Mails</button></router-link>
                     </li> 
                     <li class="nav-item">
                     <router-link :to="'/keeps/'+user.id"><button class="btn btn-dark btn-outline-warning m-1 text-light">Keeps</button></router-link>
