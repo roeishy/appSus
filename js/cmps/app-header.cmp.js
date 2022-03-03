@@ -4,7 +4,7 @@ export default {
             <nav v-if="user" class="navbar navbar-expand-lg navbar-dark bg-dark">
               <div class="container-fluid">
                 <a class="navbar-brand" href="#">AppSus</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <button @click="navToggler" class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" :aria-expanded="navbarToggler" aria-label="Toggle navigation">
                   <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -37,6 +37,8 @@ export default {
             id: null,
             user: null,
             users: null,
+            navbarToggler:false
+            
         }
     },
     created() {
@@ -47,6 +49,11 @@ export default {
             })
     },
     methods: {
+        navToggler(){
+            this.navbarToggler=!this.navbarToggler
+            console.log('navbarToggler',this.navbarToggler);
+
+        }
     },
     computed: {
         allUsers() {
