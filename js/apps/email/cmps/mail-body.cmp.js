@@ -19,7 +19,7 @@ export default {
     },
     computed: {
         text() {
-            if (this.body.length <= 100) {
+            if (this.body.length <= 20) {
                 this.showBtn = false;
                 return this.body;
             }
@@ -28,7 +28,7 @@ export default {
                 var fulltText = this.body
                 return fulltText
             }
-            var shortText = this.body.slice(0, 99)
+            var shortText = this.body.slice(0, 20) + '...'
 
             return shortText
         },
