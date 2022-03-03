@@ -1,13 +1,8 @@
 export default {
     props: ['todo'],
     template: `        
-            <button @click="remove"  class=" btn btn-secondary col-2"> ✖ </button>            
-            <p class="lead col-7" :style="doneClass" @click="isDone(todo)">{{todo.todoTxt}}</p>        
-        
-        <!-- <div class="col-2">
-            <p class="lead">{{todo.isDone}}</p>
-        </div> -->
-        <!-- <pre>{{todo}}</pre> -->
+            <button @click="remove(todo.id)"  class=" btn btn-secondary col-2"> ✖ </button>            
+            <p class="lead col-7" :style="doneClass" @click="isDone(todo)">{{todo.todoTxt}}</p>   
     `,
     components: {
 

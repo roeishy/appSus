@@ -38,9 +38,29 @@ export default {
       console.log(id);
       this.$emit('removeTodo', id, this.keep.id)
     },
-    makePinned(pin) {
-      pin != pin
-      pin ? this.isPinned = true : this.isPinned = false
+    methods: {
+      remove(id) {
+        this.$emit('remove', id)
+      },
+      removeTodo(id) { //TODO
+        this.$emit('removeTodo', this.keep.id, id)
+      },
+      makePinned(pin) {
+        pin != pin
+        pin ? this.isPinned = true : this.isPinned = false
+      }
+    },
+    computed: {
+
+    },
+    created() {
+
+    },
+    ummounted() {
+
+    },
+    mounted() {
+
     }
   },
   computed: {
