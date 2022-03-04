@@ -16,7 +16,7 @@ export default {
          </div>
      </div>
      <div class="sort-filter">
-         <mail-sort-filter @sort="setSort" />
+         <mail-sort-filter @sort="setSort" @search="setSearch" />
      </div>
          <div class="folders">
             <folders-list @read="read" @newMail="newMail" :userId="id" :unread="calcUnread" />
@@ -50,6 +50,7 @@ export default {
             inboxCnt: null,
             draftsCnt: null,
             sortBy: 'sentAt',
+            searchBy: null,
         };
     },
     mounted() {
@@ -106,8 +107,10 @@ export default {
             this.showList = !this.showList
         },
         setSort(sortBy) {
-            console.log('sort2');
             this.sortBy = sortBy;
+        },
+        setSearch(searchSTR) {
+            this.searchBy = searchSTR;
         }
     },
     computed: {
@@ -122,21 +125,21 @@ export default {
         },
         mailsForDisplay() {
             if (this.filtserBy === 'sent') {
-                return this.sortedMails.filter(mail => {
+                return this.searchMails.filter(mail => {
                     console.log('filtered:sent');
                     this.$route.params.folder = 'sent'
                     return (mail.from.userId === this.user.id && !mail.isTrash)
                 })
             }
             if (this.filtserBy === 'inbox') {
-                return this.sortedMails.filter(mail => {
+                return this.searchMails.filter(mail => {
                     console.log('filtered:inbox');
                     this.$route.params.folder = 'inbox'
                     return (mail.to === this.user.userName && !mail.isTrash)
                 })
             }
             if (this.filtserBy === 'trash') {
-                return this.sortedMails.filter(mail => {
+                return this.searchMails.filter(mail => {
                     console.log('filtered:trash');
                     this.$route.params.folder = 'trash'
                     return ((mail.from.userId === this.user.id || mail.to === this.user.userName) && mail.isTrash)
@@ -144,16 +147,18 @@ export default {
             }
         },
         sortedMails() {
-            // console.log('sorting by: ', this.sortBy);
+            console.log('sorting by: ', this.sortBy);
             if (typeof this.mails[0][this.sortBy] === 'number') {
-                console.log('sorting by: ', this.sortBy);
                 return this.mails.sort((a, b) => b[this.sortBy] - a[this.sortBy])
             }
             if (typeof this.mails[0][this.sortBy] === 'string') {
-                console.log('sorting by: ', this.sortBy);
                 return this.mails.sort((a, b) => ('' + a[this.sortBy]).localeCompare('' + b[this.sortBy]))
             }
-
+        },
+        searchMails() {
+            if (!this.searchBy) return this.sortedMails;
+            const regex = new RegExp(this.searchBy, 'i');
+            return this.sortedMails.filter(mail => regex.test(mail.subject));
         }
     }
 };
