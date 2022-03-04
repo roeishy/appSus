@@ -141,19 +141,24 @@ body{
     grid-template-columns: 2fr 4fr 2fr 1fr;
   grid-template-rows: 1fr;
   gap: 10px;
-  background-color: #ffffff;
+  /* background-color: #ffffff; */
   padding: 10px;
   border-top: 1px solid rgb(187, 184, 184);
 }
 .mail-preview:hover{
     background-color: rgb(187, 189, 188);
 }
+.mail-preview-unread{
+    background-color: #ffffff;
+}
+.mail-preview-read{
+    background-color: rgba(242,245,245,0.8);
+}
 #mail-btns{
     display: none;
 }
 .mail-btns{
     display: inline-flex;
-    /* position:relative; */
 }
 .mail-preview:hover #mail-btns{
     display: block;
@@ -164,7 +169,7 @@ body{
     display: flex;
     gap: 10px;
 }
-.subject{
+.bold-text{
     font-weight: bold;
 }
 

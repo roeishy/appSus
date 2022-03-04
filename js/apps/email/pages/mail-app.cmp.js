@@ -11,13 +11,13 @@ export default {
     <section v-if="user" class="mail-app">
      <div class="logo">
          <div class="">
-         <h1>email </h1>
+         <h1>email</h1>
          <p>welcome {{user.userName}} !</p>
          </div>
      </div>
      
          <div class="folders">
-            <folders-list @read="read" @newMail="newMail" :userId="id" />
+            <folders-list @read="read" @newMail="newMail" :userId="id" :unread="calcUnread" />
          </div>
          <div class="main">
             <mail-list @read="read" @trash="trash" v-if="showList" :mails="mailsForDisplay" />
@@ -44,6 +44,8 @@ export default {
             selectedMail: null,
             showMail: false,
             showList: true,
+            inboxCnt: null,
+            draftsCnt: null,
         };
     },
     mounted() {
@@ -67,8 +69,6 @@ export default {
         },
         newMail() {
             console.log('new mail');
-            // this.showList = this.showNewMail ? true : false
-            // this.showMail = false;
             this.showNewMail = !this.showNewMail
         },
         sendMail(mail) {
@@ -95,6 +95,7 @@ export default {
             this.selectedMail = mail
             this.showMail = true
             this.showList = !this.showList
+            mailService.updateMail(mail)
         },
         closeMail() {
             this.showMail = false
@@ -105,6 +106,11 @@ export default {
         allUsers() {
             return userService.query()
                 .then(users => this.users = users);
+        },
+        calcUnread() {
+            return this.mails.filter(mail => {
+                return (mail.to === this.user.userName && !mail.isTrash && !mail.isRead)
+            }).length
         },
         mailsForDisplay() {
             if (this.filtserBy === 'sent') {

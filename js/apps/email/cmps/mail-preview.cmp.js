@@ -3,13 +3,12 @@ import mailBody from "./mail-body.cmp.js"
 export default {
     props: ['mail'],
     template: `
-        <section class="mail-preview">
-            
+        <section class="mail-preview" :class="{'bold-text': !mail.isRead, 'mail-preview-read': !mail.isRead ,'mail-preview-unread': mail.isRead}">
                 <div class="from" @click="read" >
                     {{mail.from.userName}}
                 </div>
                 <div class="sub-body"  @click="read">
-                    <div class="subject" @click="read" >
+                    <div class="bold-text" @click="read" >
                         {{mail.subject}} - 
                     </div>
                     <div class="body" @click="read" >
@@ -28,7 +27,9 @@ export default {
         mailBody
     },
     data() {
-        return {}
+        return {
+
+        }
     },
     created() { },
     methods: {
@@ -36,6 +37,7 @@ export default {
             this.$emit('trash', this.mail)
         },
         read() {
+            this.mail.isRead = true
             this.$emit('read', this.mail)
         }
     },
