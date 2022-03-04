@@ -21,10 +21,7 @@ export default {
         }
     },
     computed: {
-        // formatDate(){
-        //     const myDate = this.todo.doneAt
-        //     return `${myDate.getFullYear()}/${myDate.getMonth()+1}/${myDate.getDay()}`
-        // }
+        
     },
     created() {
 
