@@ -1,0 +1,18 @@
+.myKeep{
+    gap: 1vh;
+    border-radius: 25px !important;
+}
+
+.myKeep:hover{
+    background-color: #ECF0F1 !important;
+    transition: 0.3s;
+}
+
+.keep-helper-btn{
+    opacity: 0;
+}
+
+.myKeep:hover > .card-body .keep-helper-btn{
+    opacity: 1;
+    transition: 0.3s;
+}

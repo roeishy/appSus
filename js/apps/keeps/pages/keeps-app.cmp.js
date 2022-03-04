@@ -6,15 +6,14 @@ import editKeep from '../cmp/edit-keep.cmp.js';
 
 export default {
     template: `
-        <section v-if="keeps">
-           <h1>keeps </h1>
+        <section v-if="keeps">                     
            <div class="input-group mb-3">
               <span class="input-group-text" id="basic-addon1">🔎</span>
               <input type="text" class="form-control" placeholder="search any keep" aria-label="searchKeep" aria-describedby="basic-addon1">
             </div>
             <div class="d-flex justify-content-center align-items-center">
             <button type="button" class="btn btn-primary col-6 mb-5" data-bs-toggle="modal" data-bs-target="#exampleModal">Add New Keep</button>
-            <edit-keep />
+            <edit-keep @addKeep="addMyKeep"/>
             </div>
             <div class="row">
             <div class="col-lg-3" v-for="keep in keeps" :key="keep.id">
@@ -63,8 +62,12 @@ export default {
             var keep = this.keeps[keepIdx]
             const todoIdx = keep.info.txt.findIndex(todo => todo.id === todoId)
             keep.info.txt.splice(todoIdx, 1)
-            keepService.save(myKeep)
+            keepService.put(myKeep)
         },
+        addMyKeep(userId, type, pinned ,info ,createAt,updateAt,style){
+            var newKeep = keepService.createKeep(userId, type, pinned ,info ,createAt,updateAt,style)
+            this.keeps.push(newKeep)
+          }
 
     },
     computed: {

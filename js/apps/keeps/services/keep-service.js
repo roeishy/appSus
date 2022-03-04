@@ -10,15 +10,15 @@ const KEY = 'keeps';
 export const keepService = {
     query,
     remove,
-    save,
+    post,
     get,
     createKeep,
-    //logIn,
+    put,
     getLogedUser,
 };
 
 function createKeep(userId, type, isPinned, info,createAt, updateAt, style) {
-    console.log('i am in the create keep');
+    console.log('create keep', userId, type, isPinned, info,createAt, updateAt, style);
     var keep = {
         id: utilService.makeId(),
         userId,
@@ -30,7 +30,8 @@ function createKeep(userId, type, isPinned, info,createAt, updateAt, style) {
         style
 
     }
-    save(keep);
+    console.log('keep obj', keep);
+    post(keep);
     return keep;
 }
 
@@ -52,9 +53,13 @@ function get(id) {
     return storageService.get(KEY, id);
 }
 
-function save(keep) {
-    if (keep.id) return storageService.put(KEY, keep);
-    else return storageService.post(KEY, keep);
+function put(keep) {
+    return storageService.put(KEY, keep);
+    
+}
+
+function post(keep) {    
+    return storageService.post(KEY, keep);
 }
 
 
