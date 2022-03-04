@@ -4,7 +4,7 @@ import mailList from '../cmps/mail-list.cmp.js';
 import foldersList from '../cmps/folders-list.cmp.js';
 import mailNew from '../cmps/mail-new.cmp.js';
 import mailRead from '../cmps/mail-read.cmp.js';
-
+import mailSortFilter from '../cmps/mail-sort-filter.cmp.js';
 
 export default {
     template: `
@@ -15,7 +15,9 @@ export default {
          <p>welcome {{user.userName}} !</p>
          </div>
      </div>
-     
+     <div class="sort-filter">
+         <mail-sort-filter @sort="setSort" />
+     </div>
          <div class="folders">
             <folders-list @read="read" @newMail="newMail" :userId="id" :unread="calcUnread" />
          </div>
@@ -32,6 +34,7 @@ export default {
         foldersList,
         mailNew,
         mailRead,
+        mailSortFilter,
     },
     data() {
         return {
@@ -46,6 +49,7 @@ export default {
             showList: true,
             inboxCnt: null,
             draftsCnt: null,
+            sortBy: 'sentAt',
         };
     },
     mounted() {
@@ -100,6 +104,10 @@ export default {
         closeMail() {
             this.showMail = false
             this.showList = !this.showList
+        },
+        setSort(sortBy) {
+            console.log('sort2');
+            this.sortBy = sortBy;
         }
     },
     computed: {
@@ -114,26 +122,38 @@ export default {
         },
         mailsForDisplay() {
             if (this.filtserBy === 'sent') {
-                return this.mails.filter(mail => {
+                return this.sortedMails.filter(mail => {
                     console.log('filtered:sent');
                     this.$route.params.folder = 'sent'
                     return (mail.from.userId === this.user.id && !mail.isTrash)
                 })
             }
             if (this.filtserBy === 'inbox') {
-                return this.mails.filter(mail => {
+                return this.sortedMails.filter(mail => {
                     console.log('filtered:inbox');
                     this.$route.params.folder = 'inbox'
                     return (mail.to === this.user.userName && !mail.isTrash)
                 })
             }
             if (this.filtserBy === 'trash') {
-                return this.mails.filter(mail => {
+                return this.sortedMails.filter(mail => {
                     console.log('filtered:trash');
                     this.$route.params.folder = 'trash'
                     return ((mail.from.userId === this.user.id || mail.to === this.user.userName) && mail.isTrash)
                 })
             }
+        },
+        sortedMails() {
+            // console.log('sorting by: ', this.sortBy);
+            if (typeof this.mails[0][this.sortBy] === 'number') {
+                console.log('sorting by: ', this.sortBy);
+                return this.mails.sort((a, b) => b[this.sortBy] - a[this.sortBy])
+            }
+            if (typeof this.mails[0][this.sortBy] === 'string') {
+                console.log('sorting by: ', this.sortBy);
+                return this.mails.sort((a, b) => ('' + a[this.sortBy]).localeCompare('' + b[this.sortBy]))
+            }
+
         }
     }
 };
