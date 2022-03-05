@@ -9,8 +9,8 @@ export default {
                         {{mail.subject}}
                 </div>
                 <div class="mail-read-btns">
-                        <button @click="trash"><img src="../imgs/trash.PNG"></button>
-                        <button @click="close"><img src="../imgs/back.PNG"></button>
+                        <button @click="trash"><img src="https://www.gstatic.com/images/icons/material/system/2x/delete_black_20dp.png"></button>
+                        <button @click="close"><img src="https://www.gstatic.com/images/icons/material/system/2x/arrow_back_black_20dp.png"></button>
                 </div>
             </div>
             <div class="mail-read-from-date">
@@ -22,7 +22,7 @@ export default {
                 </div>
             </div>
             <div class="mail-read-body">
-                {{mail.body}}
+                <p>{{mail.body}}</p>
             </div>
                 
                 

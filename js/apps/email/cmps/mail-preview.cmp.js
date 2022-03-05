@@ -19,7 +19,7 @@ export default {
                     {{date}}
                 </div>
                 <div class="mail-btns" id="mail-btns" >
-                    <button @click="trash"><img src="../imgs/trash.PNG"></button>
+                    <button @click="trash"><img src="https://www.gstatic.com/images/icons/material/system/2x/delete_black_20dp.png"></button>
                 </div>
         </section>
     `,
@@ -44,7 +44,9 @@ export default {
     computed: {
         date() {
             var dateObject = new Date(this.mail.sentAt)
-            const humanDateFormat = dateObject.toLocaleString()
+            const humanDateFormat = dateObject.getDate() +
+                "/" + (dateObject.getMonth() + 1) +
+                "/" + dateObject.getFullYear()
             return humanDateFormat
         }
     }
