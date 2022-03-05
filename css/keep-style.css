@@ -12,7 +12,7 @@
     opacity: 0;
 }
 
-.myKeep:hover > .card-body .keep-helper-btn{
+.myKeep:hover > .card-content .card-body .keep-helper-btn{
     opacity: 1;
     transition: 0.3s;
 }

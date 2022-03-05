@@ -13,7 +13,7 @@ export const keepService = {
     post,
     get,
     createKeep,
-    put,
+    save,
     getLogedUser,
 };
 
@@ -53,9 +53,9 @@ function get(id) {
     return storageService.get(KEY, id);
 }
 
-function put(keep) {
-    return storageService.put(KEY, keep);
-    
+function save(keep) {
+    if (keep.id) return storageService.put(KEY, keep);
+    else return storageService.post(KEY, keep);
 }
 
 function post(keep) {    

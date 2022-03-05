@@ -38,9 +38,7 @@ export default {
 
                   <div class="form-floating">
                     <textarea class="form-control" v-model="txt" placeholder="your note..." id="floatingTextarea"></textarea>
-                    <label for="floatingTextarea">
-                      
-                    </label>
+                    <label for="floatingTextarea">info txt</label>                  
                   </div>
                   </div>
             </div>

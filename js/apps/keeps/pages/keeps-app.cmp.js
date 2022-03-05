@@ -9,7 +9,7 @@ export default {
         <section v-if="keeps">                     
            <div class="input-group mb-3">
               <span class="input-group-text" id="basic-addon1">🔎</span>
-              <input type="text" class="form-control" placeholder="search any keep" aria-label="searchKeep" aria-describedby="basic-addon1">
+              <input @input="setFilter" v-model="filterBy.title" type="text" class="form-control" placeholder="search any keep" aria-label="searchKeep" aria-describedby="basic-addon1">
             </div>
             <div class="d-flex justify-content-center align-items-center">
             <button type="button" class="btn btn-primary col-6 mb-5" data-bs-toggle="modal" data-bs-target="#exampleModal">Add New Keep</button>
@@ -17,7 +17,7 @@ export default {
             </div>
             <div class="row">
             <div class="col-lg-3" v-for="keep in keeps" :key="keep.id">
-                <keeps-list  :keep="keep" @remove="removeKeep" @removeTodo="removeTodo"/>
+                <keeps-list  :keep="keep" @remove="removeKeep" @removeTodo="removeTodo" @changePinned="changePinned" @editMyKeep="editMyKeep"/>
             </div>
             </div>
         
@@ -33,7 +33,12 @@ export default {
         return {
             id: null,
             user: null,
-            keeps: null
+            keeps: null,
+            pinStatus: null,
+            filterBy:{
+                title:'',
+                txt:'',
+              }
         };
     },
     created() {
@@ -62,12 +67,35 @@ export default {
             var keep = this.keeps[keepIdx]
             const todoIdx = keep.info.txt.findIndex(todo => todo.id === todoId)
             keep.info.txt.splice(todoIdx, 1)
-            keepService.put(myKeep)
+            keepService.save(myKeep)
         },
-        addMyKeep(userId, type, pinned ,info ,createAt,updateAt,style){
-            var newKeep = keepService.createKeep(userId, type, pinned ,info ,createAt,updateAt,style)
+        addMyKeep(userId, type, pinned, info, createAt, updateAt, style) {
+            var newKeep = keepService.createKeep(userId, type, pinned, info, createAt, updateAt, style)
             this.keeps.push(newKeep)
-          }
+        },
+        changePinned(keep) {
+            console.log('keep', keep.isPinned);
+            if (keep.isPinned) {
+                keep.isPinned = false
+            } else {
+                keep.isPinned = true
+
+            }
+
+            console.log('master keep ', keep);
+            keepService.save(keep)
+
+            if (keep.isPinned) this.changePlace(keep)
+        },
+        changePlace(keep) {
+            const idx = this.keeps.findIndex(myKeep => myKeep.id === keep.id)
+            this.keeps.splice(idx, 1)
+            this.keeps.unshift(keep)
+
+        },
+        editMyKeep(keep){
+            keepService.save(keep)
+        }
 
     },
     computed: {
