@@ -9,11 +9,8 @@ import mailSortFilter from '../cmps/mail-sort-filter.cmp.js';
 export default {
     template: `
     <section v-if="user" class="mail-app">
-     <div class="logo">
-         <div class="">
-         <h1>email</h1>
-         <p>welcome {{user.userName}} !</p>
-         </div>
+     <div class="logo-container">
+         <div class="logo">{{logo}}</div>
      </div>
      <div class="sort-filter">
          <mail-sort-filter @sort="setSort" @search="setSearch" />
@@ -23,11 +20,10 @@ export default {
          </div>
          <div class="main">
             <mail-list @read="read" @trash="trash" v-if="showList" :mails="mailsForDisplay" />
-            <mail-new @sendMail="sendMail" v-if="showNewMail" :user="user" />
+            <mail-new @closenewMail="newMail" @sendMail="sendMail" v-if="showNewMail" :user="user" />
             <mail-read @trash="trash" @close="closeMail" v-if="showMail" :mail="selectedMail" />
          </div>
-     
-        </section>
+    </section>
     `,
     components: {
         mailList,
@@ -159,6 +155,9 @@ export default {
             if (!this.searchBy) return this.sortedMails;
             const regex = new RegExp(this.searchBy, 'i');
             return this.sortedMails.filter(mail => regex.test(mail.subject));
+        },
+        logo() {
+            return this.user.userName.charAt(0)
         }
     }
 };

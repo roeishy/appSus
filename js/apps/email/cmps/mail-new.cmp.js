@@ -5,6 +5,7 @@ export default {
             <form @submit.prevent="sendMail">
                 <div class="new-mail-head">
                     <h1>New Message</h1>
+                    <button @click.prevent="close"><img src="../imgs/back.png"></button>
                 </div>
                 <label for="to">
                     <input class="new-mail-to" v-model="newMail.to" type="text" id="to" placeholder="to:" required>
@@ -15,7 +16,7 @@ export default {
                 <label for="body">
                     <textarea class="new-mail-body" v-model="newMail.body" type="text" id="body" placeholder="" required></textarea>
                 </label>
-                <button >Send</button>
+                <button class="new-mail-send">Send</button>
             </form>
         </section>
     `,
@@ -48,6 +49,9 @@ export default {
             console.log('sending');
             console.log(this.newMail);
             this.$emit('sendMail', this.newMail);
+        },
+        close() {
+            this.$emit('closenewMail');
         }
     },
     computed: {

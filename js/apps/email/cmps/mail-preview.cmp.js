@@ -19,7 +19,7 @@ export default {
                     {{date}}
                 </div>
                 <div class="mail-btns" id="mail-btns" >
-                    <button class="" @click="trash">🗑</button>
+                    <button @click="trash"><img src="../imgs/trash.png"></button>
                 </div>
         </section>
     `,

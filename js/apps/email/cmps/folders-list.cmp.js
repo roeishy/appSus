@@ -7,18 +7,18 @@ export default {
                     new mail
             </div>
             <div >
-                <router-link class="folder" :to="'/mail/'+userId+'/inbox'">inbox {{unread}}</router-link>
+                <router-link class="folder" :to="'/mail/'+userId+'/inbox'"><img src="../imgs/inbox.png"> inbox {{unread}}</router-link>
             </div>
             <div >
                 <router-link class="folder" :to="'/mail/'+userId+'/sent'">
-                        sent
+                <img src="../imgs/sent.png">sent
                 </router-link>
             </div>
             <div >
-                <router-link class="folder" :to="'/mail/'+userId+'/trash'">trash</router-link>
+                <router-link class="folder" :to="'/mail/'+userId+'/trash'"><img src="../imgs/trash.png">trash</router-link>
             </div>
             <div >
-                <router-link class="folder" :to="'/mail/'+userId+'/drafts'">drafts</router-link>
+                <router-link class="folder" :to="'/mail/'+userId+'/drafts'"><img src="../imgs/drafts.png">drafts</router-link>
             </div>
         </section>
     `,

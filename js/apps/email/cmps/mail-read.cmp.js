@@ -4,24 +4,28 @@ export default {
     props: ['mail'],
     template: `
         <section class="mail-read">
-            <div class="">
-                <div class="">
-                    {{mail.from.userName}}
+            <div class="mail-read-sub-btns">
+                <div class="mail-read-sub">
+                        {{mail.subject}}
                 </div>
-                <div class="">
-                    {{mail.subject}}
-                </div>
-                <div class="">
-                    {{mail.body}}
-                </div>
-                <div class="">
-                    {{date}}
-                </div>
-                <div class="">
-                    <button @click="trash">delete</button>
-                    <button @click="close">x</button>
+                <div class="mail-read-btns">
+                        <button @click="trash"><img src="../imgs/trash.png"></button>
+                        <button @click="close"><img src="../imgs/back.png"></button>
                 </div>
             </div>
+            <div class="mail-read-from-date">
+                <div class="mail-read-from">
+                    From: {{mail.from.userName}}
+                </div>
+                <div class="mail-read-date">
+                    At: {{date}}
+                </div>
+            </div>
+            <div class="mail-read-body">
+                {{mail.body}}
+            </div>
+                
+                
         </section>
     `,
     components: {
