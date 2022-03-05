@@ -5,7 +5,7 @@ export default {
             <form @submit.prevent="sendMail">
                 <div class="new-mail-head">
                     <h1>New Message</h1>
-                    <button @click.prevent="close"><img src="../imgs/back.png"></button>
+                    <button @click.prevent="close"><img src="../imgs/back.PNG"></button>
                 </div>
                 <label for="to">
                     <input class="new-mail-to" v-model="newMail.to" type="text" id="to" placeholder="to:" required>

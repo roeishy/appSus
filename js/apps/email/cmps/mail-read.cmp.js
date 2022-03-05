@@ -9,8 +9,8 @@ export default {
                         {{mail.subject}}
                 </div>
                 <div class="mail-read-btns">
-                        <button @click="trash"><img src="../imgs/trash.png"></button>
-                        <button @click="close"><img src="../imgs/back.png"></button>
+                        <button @click="trash"><img src="../imgs/trash.PNG"></button>
+                        <button @click="close"><img src="../imgs/back.PNG"></button>
                 </div>
             </div>
             <div class="mail-read-from-date">
