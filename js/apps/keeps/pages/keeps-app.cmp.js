@@ -9,7 +9,7 @@ export default {
         <section v-if="keeps">                     
            <div class="input-group mb-3">
               <span class="input-group-text" id="basic-addon1">🔎</span>
-              <input @input="setFilter" v-model="filterBy.title" type="text" class="form-control" placeholder="search any keep" aria-label="searchKeep" aria-describedby="basic-addon1">
+              <input @input="filterKeeps" v-model="filterBy" type="text" class="form-control" placeholder="search any keep" aria-label="searchKeep" aria-describedby="basic-addon1">
             </div>
             <div class="d-flex justify-content-center align-items-center">
             <button type="button" class="btn btn-primary col-6 mb-5" data-bs-toggle="modal" data-bs-target="#exampleModal">Add New Keep</button>
@@ -17,11 +17,11 @@ export default {
             </div>
             <div class="row">
             <div class="col-lg-3" v-for="keep in keeps" :key="keep.id">
-                <keeps-list  :keep="keep" @remove="removeKeep" @removeTodo="removeTodo" @changePinned="changePinned" @editMyKeep="editMyKeep"/>
+                <keeps-list  :keep="keep" @remove="removeKeep" @removeTodo="removeTodo" @isTodoDone="isTodoDone" @changePinned="changePinned" @editMyKeep="editMyKeep" @changeIndex="changeIndex"/>
             </div>
             </div>
         
-           <pre>{{keeps}}</pre>
+           <!-- <pre>{{keeps}}</pre> -->
         </section>
     `,
     components: {
@@ -35,10 +35,8 @@ export default {
             user: null,
             keeps: null,
             pinStatus: null,
-            filterBy:{
-                title:'',
-                txt:'',
-              }
+            filterBy:null
+            
         };
     },
     created() {
@@ -54,11 +52,25 @@ export default {
             const idx = this.keeps.findIndex(keep => keep.id === id)
             this.keeps.splice(idx, 1)
         },
+        changeIndex(kId, newIndex) {
+            // keepService.remove(id)
+            // const idx = this.keeps.findIndex(keep => keep.id === id)
+            // this.keeps.splice(idx, 1)
+        },
         getKeepsUser() {
             this.id = this.$route.params.userId;
             keepService.query(this.id).then(res => {
                 this.keeps = res
             })
+        },
+        isTodoDone(keepId, todoId){
+            var myKeep = this.keeps.find(k => k.id === keepId)
+            var keepIdx = this.keeps.findIndex(keep => keep.id === keepId)
+            var keep = this.keeps[keepIdx]
+            const todoIdx = keep.info.txt.findIndex(todo => todo.id === todoId)
+            // console.log('keep.info.txt[todoIdx].isDone', keep.info.txt[todoIdx].isDone);
+            keep.info.txt[todoIdx].isDone? keep.info.txt[todoIdx].isDone = false : keep.info.txt[todoIdx].isDone = true
+            keepService.save(myKeep)
         },
 
         removeTodo(keepId, todoId) {
@@ -95,7 +107,11 @@ export default {
         },
         editMyKeep(keep){
             keepService.save(keep)
+        },
+        filterKeeps(){            
+            
         }
+        
 
     },
     computed: {

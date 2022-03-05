@@ -14,17 +14,22 @@ export default {
                 <div class="card-body">
                     <p v-if="keep.type==='note-txt'" class="lead">{{keep.info.txt}}</p>
                     <div v-if="keep.type==='note-todos'" class="row mb-2" v-for="todo in keep.info.txt" :key="todo.id">
-                        <todos-preview :todo="todo" @removeTodo="removeTodo" />
+                        <todos-preview :todo="todo" @removeTodo="removeTodo" @isDone="isTodoDone" />
                     </div>
                     <div class="card-btns mt-4">
-                        <button v-if="keep.isPinned" class="btn btn-success keep-helper-btn"
+                        <button class="btn btn-danger keep-helper-btn ms-2" @click="remove(keep.id)"><i
+                                class="bi bi-trash-fill"></i></button>
+                        <button v-if="keep.isPinned" class="btn btn-success keep-helper-btn ms-2"
                             @click="changePinned(keep)"><i class="bi bi-pin-angle"></i></button>
                         <button v-if="!keep.isPinned" class="btn btn-light keep-helper-btn ms-2"
                             @click="changePinned(keep)"><i class="bi bi-pin-angle-fill"></i></button>
                         <button @click="editKeep(keep)" class="btn btn-dark keep-helper-btn ms-2"><i
                                 class="bi bi-pencil-fill"></i></button>
-                        <button class="btn btn-danger keep-helper-btn ms-2" @click="remove(keep.id)"><i
-                                class="bi bi-trash-fill"></i></button>
+                        <button @click="moveDown(keep.id)" class="btn btn-primary keep-helper-btn ms-2">
+                                <i class="bi bi-arrow-down-square"></i></button>
+                        <button @click="moveUp(keep.id)" class="btn btn-primary keep-helper-btn ms-2">
+                                <i class="bi bi-arrow-up-square"></i></button>
+                        
                     </div>
                 </div>
             </div>
@@ -48,7 +53,8 @@ export default {
       isPinned: false,
       editStatus: false,
       title:null,
-      txt:null
+      txt:null,
+      keepIndex:null
     };
   },
   methods: {
@@ -58,9 +64,24 @@ export default {
     removeTodo(id) { 
       this.$emit('removeTodo', this.keep.id, id)
     },
+    isTodoDone(id) { 
+      this.$emit('isTodoDone', this.keep.id, id)
+    },
     changePinned() {      
       this.$emit('changePinned', this.keep)
     },
+    moveUp(kId) {      
+      this.keepIndex = 1
+      this.changeIndex(kId, this.keepIndex)      
+    },
+    moveDown(kId) {      
+      this.keepIndex = -1
+      this.changeIndex(kId, this.keepIndex)   
+    },
+    changeIndex(kId, newIndex) {      
+      this.$emit('changeIndex', kId, newIndex)
+      this.keepIndex = null
+    },    
     editKeep(){
       this.editStatus = true
       this.title = this.keep.info.title

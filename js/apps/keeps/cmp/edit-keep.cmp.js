@@ -24,7 +24,7 @@ export default {
                       <h3>make todo</h3>
                       <input type="text" v-for="inp in todosCount" class="form-control col-9" v-model="todoArr[inp-1]" placeholder="Enter some ToDo!">
                       <button @click="addMoreTodo" class="mt-1 btn btn-success col-2">+</button>
-                      <pre>{{todoArr}}</pre>
+                      <!-- <pre>{{todoArr}}</pre> -->
                     </div>
                   </div>
                   <hr>
