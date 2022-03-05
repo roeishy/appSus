@@ -8,10 +8,10 @@ export default {
                     {{mail.from.userName}}
                 </div>
                 <div class="sub-body"  @click="read">
-                    <div class="bold-text" @click="read" >
+                    <div class="bold-text"  >
                         {{mail.subject}} - 
                     </div>
-                    <div class="body" @click="read" >
+                    <div class="body"  >
                         <mail-body :body="mail.body" />
                     </div>
                 </div>

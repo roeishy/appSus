@@ -72,7 +72,7 @@ body{
     grid-template-columns: 1fr 9fr ;
   grid-template-rows: 1fr 9fr;
   grid-template-areas:
-  "logo ."
+  "logo sort-filter"
   "folders main"
   ;
   gap: 10px;
@@ -87,6 +87,12 @@ body{
 }
 .folders{
     grid-area: folders;
+}
+.sort-filter{
+    grid-area: sort-filter;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
 }
 
 /* mail folders */
@@ -224,7 +230,8 @@ body{
   border:0;
   box-shadow:0 0 15px 4px rgba(0,0,0,0.06);
   border-radius:10px;
-  width: 100vh;
+  width: 50vh;
+  /* overflow-wrap: break-word; */
 }
 
 .new-mail-subject{
@@ -232,7 +239,8 @@ body{
     border:0;
     box-shadow:0 0 15px 4px rgba(0,0,0,0.06);
     border-radius:10px;
-    width: 100vh;
+    width: 50vh;
+    /* overflow-wrap: break-word; */
 }
 
 .new-mail-body{
@@ -240,9 +248,26 @@ body{
     border:0;
     box-shadow:0 0 15px 4px rgba(0,0,0,0.06);
     border-radius:10px;
-    width: 100vh;
+    width: 50vh;
     height: 30vh;
+    /* overflow-wrap: break-word; */
 }
+
+/* mail-sort-filter */
+.filter{
+    padding:10px;
+    border: 1px solid black;
+    box-shadow:0 0 15px 4px rgba(0, 0, 0, 0.082);
+    border-radius:10px;
+    width: 30vh;
+  }
+.sort{
+    padding:10px;
+    border: 1px solid black;
+    box-shadow:0 0 15px 4px rgba(0, 0, 0, 0.082);
+    border-radius:10px;
+    width: 10vh; 
+  }
 
 
 /* user-msg */
