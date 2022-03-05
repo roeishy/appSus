@@ -161,6 +161,7 @@ body{
 /* mail preview */
 .mail-list{
     overflow-y: auto;
+    height: 80vh;
 }
 ::-webkit-scrollbar-thumb {
     background-color: rgba(0,0,0,0.2);
@@ -235,7 +236,7 @@ body{
 
 /* new-mail */
 .mail-new{
-    position: absolute;
+    position: fixed;
     right: 0;
     bottom: 0;
     width: 50vh;
