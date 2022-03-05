@@ -2,7 +2,7 @@ export default {
     props: ['user'],
     template: `
         <section class="mail-new">
-            <form @submit.prevent="sendMail">
+            <form @submit.prevent="sendMail" autocomplete="off">
                 <div class="new-mail-head">
                     <h1>New Message</h1>
                     <button @click.prevent="close"><img src="https://www.gstatic.com/images/icons/material/system/2x/arrow_back_black_20dp.png"></button>
