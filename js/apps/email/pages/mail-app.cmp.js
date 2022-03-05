@@ -4,20 +4,22 @@ import mailList from '../cmps/mail-list.cmp.js';
 import foldersList from '../cmps/folders-list.cmp.js';
 import mailNew from '../cmps/mail-new.cmp.js';
 import mailRead from '../cmps/mail-read.cmp.js';
-
+import mailSortFilter from '../cmps/mail-sort-filter.cmp.js';
 
 export default {
     template: `
     <section v-if="user" class="mail-app">
      <div class="logo">
          <div class="">
-         <h1>email </h1>
+         <h1>email</h1>
          <p>welcome {{user.userName}} !</p>
          </div>
      </div>
-     
+     <div class="sort-filter">
+         <mail-sort-filter @sort="setSort" @search="setSearch" />
+     </div>
          <div class="folders">
-            <folders-list @read="read" @newMail="newMail" :userId="id" />
+            <folders-list @read="read" @newMail="newMail" :userId="id" :unread="calcUnread" />
          </div>
          <div class="main">
             <mail-list @read="read" @trash="trash" v-if="showList" :mails="mailsForDisplay" />
@@ -32,6 +34,7 @@ export default {
         foldersList,
         mailNew,
         mailRead,
+        mailSortFilter,
     },
     data() {
         return {
@@ -44,6 +47,10 @@ export default {
             selectedMail: null,
             showMail: false,
             showList: true,
+            inboxCnt: null,
+            draftsCnt: null,
+            sortBy: 'sentAt',
+            searchBy: null,
         };
     },
     mounted() {
@@ -67,8 +74,6 @@ export default {
         },
         newMail() {
             console.log('new mail');
-            // this.showList = this.showNewMail ? true : false
-            // this.showMail = false;
             this.showNewMail = !this.showNewMail
         },
         sendMail(mail) {
@@ -95,10 +100,17 @@ export default {
             this.selectedMail = mail
             this.showMail = true
             this.showList = !this.showList
+            mailService.updateMail(mail)
         },
         closeMail() {
             this.showMail = false
             this.showList = !this.showList
+        },
+        setSort(sortBy) {
+            this.sortBy = sortBy;
+        },
+        setSearch(searchSTR) {
+            this.searchBy = searchSTR;
         }
     },
     computed: {
@@ -106,28 +118,47 @@ export default {
             return userService.query()
                 .then(users => this.users = users);
         },
+        calcUnread() {
+            return this.mails.filter(mail => {
+                return (mail.to === this.user.userName && !mail.isTrash && !mail.isRead)
+            }).length
+        },
         mailsForDisplay() {
             if (this.filtserBy === 'sent') {
-                return this.mails.filter(mail => {
+                return this.searchMails.filter(mail => {
                     console.log('filtered:sent');
                     this.$route.params.folder = 'sent'
                     return (mail.from.userId === this.user.id && !mail.isTrash)
                 })
             }
             if (this.filtserBy === 'inbox') {
-                return this.mails.filter(mail => {
+                return this.searchMails.filter(mail => {
                     console.log('filtered:inbox');
                     this.$route.params.folder = 'inbox'
                     return (mail.to === this.user.userName && !mail.isTrash)
                 })
             }
             if (this.filtserBy === 'trash') {
-                return this.mails.filter(mail => {
+                return this.searchMails.filter(mail => {
                     console.log('filtered:trash');
                     this.$route.params.folder = 'trash'
                     return ((mail.from.userId === this.user.id || mail.to === this.user.userName) && mail.isTrash)
                 })
             }
+        },
+        sortedMails() {
+            console.log('sorting by: ', this.sortBy);
+            if (typeof this.mails[0][this.sortBy] === 'number') {
+                return this.mails.sort((a, b) => b[this.sortBy] - a[this.sortBy])
+            }
+            if (typeof this.mails[0][this.sortBy] === 'string') {
+                return this.mails.sort((a, b) => ('' + a[this.sortBy]).localeCompare('' + b[this.sortBy]))
+            }
+        },
+        searchMails() {
+            if (!this.searchBy) return this.sortedMails;
+            const regex = new RegExp(this.searchBy, 'i');
+            return this.sortedMails.filter(mail => regex.test(mail.subject));
         }
     }
 };
