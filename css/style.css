@@ -1,5 +1,6 @@
 * {
     box-sizing: border-box;
+    font-family: "Basier circle",-apple-system,system-ui,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
 }
 
 h1, h2, h3, h4, h5, h6, p {
@@ -76,7 +77,6 @@ body{
 
 
 
-
 /* mail app */ 
 .mail-app{
     display: grid;
@@ -84,21 +84,46 @@ body{
     grid-template-columns: 1fr 9fr ;
   grid-template-rows: 1fr 9fr;
   grid-template-areas:
-  "logo ."
+  "logo sort-filter"
   "folders main"
   ;
   gap: 10px;
   background-color: #ffffff;
+  
 }
 
-.logo{
+.logo-container{
     grid-area: logo;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    margin-right: 80px;
+}
+.logo{
+    background-color: #1a73e8;
+    -webkit-border-radius: 50%;
+    border-radius: 50%;
+    display: block;
+    height: 80px;
+    width: 80px;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    font-size: xx-large;
+    font-weight: bolder;
+    text-transform: capitalize;
 }
 .main{
     grid-area: main;
 }
 .folders{
     grid-area: folders;
+}
+.sort-filter{
+    grid-area: sort-filter;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
 }
 
 /* mail folders */
@@ -120,7 +145,7 @@ body{
   cursor: pointer;
   display: inline-block;
   font-family: "Basier circle",-apple-system,system-ui,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
-  font-size: 1.1rem;
+  font-size:larger;
   font-weight: 600;
   line-height: 1;
   padding: 1rem 1.6rem;
@@ -132,6 +157,12 @@ body{
   user-select: none;
   -webkit-user-select: none;
   touch-action: manipulation;
+  display: flex;
+}
+
+.folder img{
+    width: 20px;
+    height: 20px;
 }
 
 .folder:hover {
@@ -139,14 +170,15 @@ body{
   color: #fff;
 }
 
-@media (min-width: 768px) {
-    .folder {
-    font-size: 1.125rem;
-    padding: 1rem 2rem;
-  }
+/* mail preview */
+.mail-list{
+    overflow-y: auto;
+    height: 80vh;
 }
-
-/* mail preview */ 
+::-webkit-scrollbar-thumb {
+    background-color: rgba(0,0,0,0.2);
+    -webkit-box-shadow: inset 1px 1px 0px rgb(0 0 0 / 10%), inset 0px -1px 0px rgb(0 0 0 / 7%);
+} 
 .mail-preview{
     display: grid;
     height: 90px;
@@ -156,6 +188,9 @@ body{
   /* background-color: #ffffff; */
   padding: 10px;
   border-top: 1px solid rgb(187, 184, 184);
+  align-items: center;
+  font-size: larger;
+  font-weight: 600;
 }
 .mail-preview:hover{
     background-color: rgb(187, 189, 188);
@@ -169,11 +204,35 @@ body{
 #mail-btns{
     display: none;
 }
-.mail-btns{
-    display: inline-flex;
+.mail-btns button{
+    /* display: inline-flex; */
+    background-color: rgba(255, 255, 255, 0);
+  border: 0 solid #e2e8f0;
+  border-radius:1.5rem;
+  box-sizing: border-box;
+  color: #0d172a;
+  cursor: pointer;
+  display: inline-block;
+  font-family: "Basier circle",-apple-system,system-ui,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+  font-size: 1.1rem;
+  font-weight: 600;
+  line-height: 1;
+  padding: 1rem 1.6rem;
+  text-align: center;
+  text-decoration: none #0d172a solid;
+  text-decoration-thickness: auto;
+  transition: all .1s cubic-bezier(.4, 0, .2, 1);
+  box-shadow: 0px 1px 2px rgba(166, 175, 195, 0.25);
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+    
+}
+.mail-btns button:hover{
+  background-color: rgba(255, 255, 255, 0.281);
 }
 .mail-preview:hover #mail-btns{
-    display: block;
+    display: flex;
     align-items: center;
 }
 
@@ -183,12 +242,13 @@ body{
 }
 .bold-text{
     font-weight: bold;
+    font-weight: 700;
 }
 
 
 /* new-mail */
 .mail-new{
-    position: absolute;
+    position: fixed;
     right: 0;
     bottom: 0;
     width: 50vh;
@@ -215,15 +275,46 @@ body{
     color: white;
     margin-left: 0px;
     background: #202124;;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .new-mail-head h1{
     -webkit-font-smoothing: antialiased;
     font-family: Roboto,RobotoDraft,Helvetica,Arial,sans-serif;
-    font-size: .875rem;
+    font-size: 1.5rem;
     letter-spacing: .2px;
     font-weight: 500;
     margin: 15px;
+}
+
+.new-mail-head button{
+    /* display: inline-flex; */
+    background-color: rgba(255, 255, 255, 0);
+  border: 0 solid #e2e8f0;
+  border-radius:1.5rem;
+  box-sizing: border-box;
+  color: #0d172a;
+  cursor: pointer;
+  display: inline-block;
+  font-family: "Basier circle",-apple-system,system-ui,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+  font-size: 1.1rem;
+  font-weight: 600;
+  line-height: 1;
+  padding: 1rem 1.6rem;
+  text-align: center;
+  text-decoration: none #0d172a solid;
+  text-decoration-thickness: auto;
+  transition: all .1s cubic-bezier(.4, 0, .2, 1);
+  box-shadow: 0px 1px 2px rgba(166, 175, 195, 0.25);
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+    
+}
+.new-mail-head button:hover{
+  background-color: rgba(255, 255, 255, 0.281);
 }
 
 .mail-new form{
@@ -236,7 +327,8 @@ body{
   border:0;
   box-shadow:0 0 15px 4px rgba(0,0,0,0.06);
   border-radius:10px;
-  width: 100vh;
+  width: 50vh;
+  /* overflow-wrap: break-word; */
 }
 
 .new-mail-subject{
@@ -244,7 +336,8 @@ body{
     border:0;
     box-shadow:0 0 15px 4px rgba(0,0,0,0.06);
     border-radius:10px;
-    width: 100vh;
+    width: 50vh;
+    /* overflow-wrap: break-word; */
 }
 
 .new-mail-body{
@@ -252,10 +345,345 @@ body{
     border:0;
     box-shadow:0 0 15px 4px rgba(0,0,0,0.06);
     border-radius:10px;
-    width: 100vh;
+    width: 50vh;
     height: 30vh;
+    /* overflow-wrap: break-word; */
 }
 
+.new-mail-send{
+    align-items: center;
+    display: inline-flex;
+    justify-content: center;
+    outline: none;
+    position: relative;
+    z-index: 0;
+    -webkit-font-smoothing: antialiased;
+    font-family: 'Google Sans',Roboto,RobotoDraft,Helvetica,Arial,sans-serif;
+    font-size: .875rem;
+    letter-spacing: .25px;
+    background: none;
+    border-radius: 4px;
+    box-sizing: border-box;
+    color: #5f6368;
+    cursor: pointer;
+    font-weight: 500;
+    height: 36px;
+    min-width: 80px;
+    outline: none;
+    padding: 0 16px;
+    background-color: #1a73e8;
+    color: #fff;
+    border: none;
+}
+
+/* mail-sort-filter */
+.filter{
+    padding:10px;
+    border: 1px solid black;
+    box-shadow:0 0 15px 4px rgba(0, 0, 0, 0.082);
+    border-radius:10px;
+    width: 30vh;
+  }
+.sort{
+    padding:10px;
+    border: 1px solid black;
+    box-shadow:0 0 15px 4px rgba(0, 0, 0, 0.082);
+    border-radius:10px;
+    width: 10vh; 
+  }
+
+/* mail-read */
+.mail-read{
+    display: grid;
+    height: 70vh;
+    align-items: center;
+}
+.mail-read-from-date{
+    height: 5vh;
+    display: flex;
+    gap: 10vh;
+    align-items: center;
+    border-bottom: 1px solid rgb(187, 184, 184);
+}
+.mail-read-sub-btns{
+    height: 5vh;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    gap: 10vh;
+    align-items: center;
+}
+.mail-read-sub{
+    font-size:xx-large;
+}
+.mail-read-body{
+    height: 50vh;
+    font-size:x-large;
+}
+
+.mail-read-body p{
+    word-break: break-all;
+    white-space: pre-wrap;
+    padding: 15px;
+}
+
+.mail-read-from{
+    font-size:x-large;
+}
+.mail-read-date{
+}
+.mail-read-btns{
+    display: flex;
+    gap: 10px;
+    margin-right: 20px;
+}
+
+.mail-read-btns button{
+    /* display: inline-flex; */
+    background-color: rgba(255, 255, 255, 0);
+  border: 0 solid #e2e8f0;
+  border-radius:1.5rem;
+  box-sizing: border-box;
+  color: #0d172a;
+  cursor: pointer;
+  display: inline-block;
+  font-family: "Basier circle",-apple-system,system-ui,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+  font-size: 1.1rem;
+  font-weight: 600;
+  line-height: 1;
+  padding: 1rem 1.6rem;
+  text-align: center;
+  text-decoration: none #0d172a solid;
+  text-decoration-thickness: auto;
+  transition: all .1s cubic-bezier(.4, 0, .2, 1);
+  box-shadow: 0px 1px 2px rgba(166, 175, 195, 0.25);
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+    
+}
+.mail-read-btns button:hover{
+  background-color: rgba(255, 255, 255, 0.281);
+}
+
+
+@media (max-width: 700px) {
+    /* mail preview */ 
+.mail-preview{
+  display: grid;
+  height: 120px;
+  grid-template-columns: 4fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr ;
+  grid-template-areas:
+  "preview-from ."
+  "preview-date preview-mail-btns"
+  "preview-sub-body preview-sub-body"
+  ;
+  gap: 10px;
+  /* background-color: #ffffff; */
+  padding: 10px;
+  border-top: 1px solid rgb(187, 184, 184);
+}
+.from{
+    grid-area: preview-from;
+}
+.sub-body{
+    grid-area: preview-sub-body;
+}
+.date{
+    grid-area: preview-date;
+}
+.mail-btns{
+    grid-area: preview-mail-btns;
+    justify-content: center;
+    align-items: center;
+}
+#mail-btns{
+    display: flex;
+    align-items: center;
+    z-index: 2;
+}
+.mail-btns button{
+  display: flex;
+  width: 30px;
+  height: 30px;
+  justify-content: center;
+  align-items: center;
+}
+.mail-btns button img{
+    width: 30px;
+  height: 30px;
+}
+
+/* mail-read */
+
+.mail-read-sub-btns{
+    width: 3vh;
+    /* gap: 2vh; */
+}
+.mail-read-btns button{
+  display: flex;
+  width: 30px;
+  height: 30px;
+  justify-content: center;
+  align-items: center;
+}
+.mail-read-btns button img{
+  width: 30px;
+  height: 30px;
+}
+.mail-read-from-date{
+    gap: 2vh;
+}
+
+/* mail-sort-filter */
+.filter{
+    width: 10vh;
+}
+.sort{
+    width: 6vh;
+}
+
+/* new-mail */
+.mail-new{
+    width: 40vh;
+}
+.new-mail-to{
+    width: 40vh
+}
+.new-mail-subject{
+    width: 40vh
+}
+.new-mail-body{
+    width: 40vh
+}
+
+}
+
+
+@media (max-width: 500px) {
+
+.mail-app{
+    /* grid-template-columns: 1fr;
+  grid-template-rows: 1fr 1fr 9fr;
+    grid-template-areas:
+  "folders"
+  "sort-filter"
+  "main"
+  ; */
+  display: flex;
+  flex-direction: column;
+}
+
+.logo{
+    display: none;
+}
+
+    /* mail preview */ 
+.mail-preview{
+  display: grid;
+  height: 120px;
+  grid-template-columns: 4fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr ;
+  grid-template-areas:
+  "preview-from ."
+  "preview-date preview-mail-btns"
+  "preview-sub-body preview-sub-body"
+  ;
+  gap: 10px;
+  /* background-color: #ffffff; */
+  padding: 10px;
+  border-top: 1px solid rgb(187, 184, 184);
+}
+.from{
+    grid-area: preview-from;
+}
+.sub-body{
+    grid-area: preview-sub-body;
+}
+.date{
+    grid-area: preview-date;
+}
+.mail-btns{
+    grid-area: preview-mail-btns;
+    justify-content: center;
+    align-items: center;
+}
+#mail-btns{
+    display: flex;
+    align-items: center;
+    z-index: 2;
+}
+.mail-btns button{
+  display: flex;
+  width: 30px;
+  height: 30px;
+  justify-content: center;
+  align-items: center;
+}
+.mail-btns button img{
+    width: 30px;
+  height: 30px;
+}
+
+/* mail-read */
+
+.mail-read-sub-btns{
+    width: 2vh;
+    /* gap: 16vh; */
+}
+.mail-read-btns button{
+    display: flex;
+  width: 30px;
+  height: 30px;
+  justify-content: center;
+  align-items: center;
+}
+.mail-read-btns button img{
+  width: 30px;
+  height: 30px;
+}
+.mail-read-from-date{
+    gap: 2vh;
+}
+
+/* mail-sort-filter */
+.filter{
+    width: 10vh;
+}
+.sort{
+    width: 6vh;
+}
+
+/* new-mail */
+.mail-new{
+    width: 30vh;
+    margin-left: 0px;
+}
+.new-mail-to{
+    width: 30vh
+}
+.new-mail-subject{
+    width: 30vh
+}
+.new-mail-body{
+    width: 30vh
+}
+
+/* mail folders */
+.mail-folders{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.folder{
+    width: 7rem;
+    border-radius:1.5rem;
+}
+
+}
 
 /* user-msg */
 

@@ -1,11 +1,12 @@
 export default {
     template: `
         <section class="mail-sort-filter">
-            <select v-model="sortBy" id="sort">
+            <input class="filter" v-model="searchSTR" type="text"  placeholder="search">
+            <select class="sort" v-model="sortBy" id="sort">
                 <option value="sentAt">date</option>
                 <option value="subject">title</option>
             </select>
-            <input class="" v-model="searchSTR" type="text"  placeholder="search">
+            
 </section>
     `,
     data() {
