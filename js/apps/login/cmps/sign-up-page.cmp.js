@@ -4,7 +4,7 @@ export default {
         <section class="home-page app-main d-flex justify-content-center align-items-center">
         <div class="card" style="width: 30%;">
             <h1>sign up</h1>
-          <img src="https://icon-library.com/images/avatar-icon-png/avatar-icon-png-8.jpg" style="width:300px" class="card-img-top rounded mx-auto" alt="...">
+          <img src="https://icon-library.com/images/avatar-icon-png/avatar-icon-png-8.jpg" style="max-width:300px" class="card-img-top rounded mx-auto" alt="...">
           <div class="card-body">            
           <form @submit.prevent="login" autocomplete="off">
                 <label for="uName" class="col-12 fs-5">

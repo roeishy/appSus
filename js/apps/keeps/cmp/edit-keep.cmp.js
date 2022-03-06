@@ -32,8 +32,7 @@ export default {
                   <ul>
                         <li>You can write something to create note-text</li>
                         <li>You can paste url from youtube to create note-video</li>
-                        <li>You can paste img url from any were to create note-img</li>
-                        <li>You can write sentences that start with two stars (**) to create note-todo</li>
+                        <li>You can paste img url from any were to create note-img</li>                        
                       </ul>
 
                   <div class="form-floating">
