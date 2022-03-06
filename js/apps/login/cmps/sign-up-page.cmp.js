@@ -6,7 +6,7 @@ export default {
             <h1>sign up</h1>
           <img src="https://icon-library.com/images/avatar-icon-png/avatar-icon-png-8.jpg" style="max-width:300px" class="card-img-top rounded mx-auto" alt="...">
           <div class="card-body">            
-          <form @submit.prevent="login" autocomplete="off">
+          <form @submit.prevent="signUp" autocomplete="off">
                 <label for="uName" class="col-12 fs-5">
                     user name:
                     <input class="form-control" placeholder="User Name" v-model="user.userName" type="text" id="uName" required>
