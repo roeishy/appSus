@@ -16,7 +16,7 @@ export default {
             <edit-keep @addKeep="addMyKeep"/>
             </div>
             <div class="row">
-            <div class="col-lg-3" v-for="keep in keeps" :key="keep.id">
+            <div class="col-md-6 col-lg-3" v-for="keep in keeps" :key="keep.id">
                 <keeps-list  :keep="keep" @remove="removeKeep" @removeTodo="removeTodo" @isTodoDone="isTodoDone" @changePinned="changePinned" @editMyKeep="editMyKeep" @changeIndex="changeIndex"/>
             </div>
             </div>
