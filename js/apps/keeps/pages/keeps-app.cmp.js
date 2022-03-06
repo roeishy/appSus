@@ -7,11 +7,11 @@ import editKeep from '../cmp/edit-keep.cmp.js';
 export default {
     template: `
         <section v-if="keeps">                     
-           <div class="input-group mb-3">
+           <!-- <div class="input-group mb-3">
               <span class="input-group-text" id="basic-addon1">🔎</span>
               <input @input="filterKeeps" v-model="filterBy" type="text" class="form-control" placeholder="search any keep" aria-label="searchKeep" aria-describedby="basic-addon1">
-            </div>
-            <div class="d-flex justify-content-center align-items-center">
+            </div> -->
+            <div class="d-flex justify-content-center align-items-center mt-5">
             <button type="button" class="btn btn-primary col-6 mb-5" data-bs-toggle="modal" data-bs-target="#exampleModal">Add New Keep</button>
             <edit-keep @addKeep="addMyKeep"/>
             </div>
