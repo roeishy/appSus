@@ -25,10 +25,10 @@ export default {
                             @click="changePinned(keep)"><i class="bi bi-pin-angle-fill"></i></button>
                         <button @click="editKeep(keep)" class="btn btn-dark keep-helper-btn ms-2"><i
                                 class="bi bi-pencil-fill"></i></button>
-                        <button @click="moveDown(keep.id)" class="btn btn-primary keep-helper-btn ms-2">
+                        <!-- <button @click="moveDown(keep.id, keep)" class="btn btn-primary keep-helper-btn ms-2">
                                 <i class="bi bi-arrow-down-square"></i></button>
-                        <button @click="moveUp(keep.id)" class="btn btn-primary keep-helper-btn ms-2">
-                                <i class="bi bi-arrow-up-square"></i></button>
+                        <button @click="moveUp(keep.id, keep)" class="btn btn-primary keep-helper-btn ms-2">
+                                <i class="bi bi-arrow-up-square"></i></button> -->
                         
                     </div>
                 </div>
@@ -71,15 +71,15 @@ export default {
       this.$emit('changePinned', this.keep)
     },
     moveUp(kId) {      
-      this.keepIndex = 1
+      this.keepIndex = -1
       this.changeIndex(kId, this.keepIndex)      
     },
     moveDown(kId) {      
-      this.keepIndex = -1
+      this.keepIndex = 1
       this.changeIndex(kId, this.keepIndex)   
     },
-    changeIndex(kId, newIndex) {      
-      this.$emit('changeIndex', kId, newIndex)
+    changeIndex(kId, keep, newIndex) {      
+      this.$emit('changeIndex', kId, keep, newIndex)
       this.keepIndex = null
     },    
     editKeep(){

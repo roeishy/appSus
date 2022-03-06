@@ -4,10 +4,13 @@ import { userService } from '../services/userService.js'
 export default {
     template: `
         <section v-if="user" class="home-page">
-           <h1>welcome </h1>
-           <p>{{user.userName}}</p>
-           <router-link :to="'/mail/'+user.id+'/inbox'">email</router-link> | 
-            <router-link :to="'/keeps/'+user.id">keeps</router-link> |
+            <div class="home-page-bg">
+                <h1 class="text-center p-3">Welcome To APPSUS System</h1>
+                <p class="lead p-5">welcome {{user.userName}}</p>
+            </div>
+           
+           <!-- <router-link :to="'/mail/'+user.id+'/inbox'">email</router-link> | 
+            <router-link :to="'/keeps/'+user.id">keeps</router-link> | -->
         </section>
     `,
     components: {

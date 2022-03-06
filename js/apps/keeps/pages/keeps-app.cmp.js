@@ -52,10 +52,17 @@ export default {
             const idx = this.keeps.findIndex(keep => keep.id === id)
             this.keeps.splice(idx, 1)
         },
-        changeIndex(kId, newIndex) {
-            // keepService.remove(id)
-            // const idx = this.keeps.findIndex(keep => keep.id === id)
+        changeIndex(kId, keep, newIndex) {
+            // // keepService.remove(kId)
+            // const idx = this.keeps.findIndex(keep => keep.id === kId)
+            // // this.keeps.splice(idx, 1)
+            // if(newIndex===-1){
+            //     this.keeps.splice(idx+1, 0, keep)
+            // }else{
+            //     this.keeps.splice(idx-1, 0, keep)
+            // }
             // this.keeps.splice(idx, 1)
+            
         },
         getKeepsUser() {
             this.id = this.$route.params.userId;
@@ -109,8 +116,11 @@ export default {
             keepService.save(keep)
         },
         filterKeeps(){            
-            
+            if (!this.filterBy) return this.keeps;
+            const regex = new RegExp(this.filterBy, 'i');
+            return this.keeps.filter(keep => regex.test(keep.info.title));
         }
+        
         
 
     },
@@ -119,6 +129,7 @@ export default {
             return keepService.query()
                 .then(keeps => this.keeps = keeps);
         },
+        
 
     }
 };
